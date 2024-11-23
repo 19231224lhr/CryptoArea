@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>hello wasm</title>
+    <script src="wasm_exec.js"></script>
+    <script>
+        const go = new Go();
+        WebAssembly.instantiateStreaming(
+            fetch("json.wasm"),
+            go.importObject
+        ).then((result) => {
+            go.run(result.instance);
+            prettyJSON('{"user_id": "571401777717031","user_name": "代码与野兽","description": "关注real-time web、低代码、数据可视化、web3等领域。"}')
+        });
+    </script>
+</head>
+<body></body>
+</html>
