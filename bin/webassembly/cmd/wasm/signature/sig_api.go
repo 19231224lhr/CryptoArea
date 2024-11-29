@@ -1,7 +1,5 @@
 package signature
 
-import "C"
-
 import (
 	bls "blockchain-crypto/signature/bls/bls12381"
 	"blockchain-crypto/signature/ec_schnorr"
@@ -28,7 +26,7 @@ func KeygenAPI(scheme string) ([]byte, []byte) {
 		}
 	case "eddsa":
 		{
-			return ec_schnorr.KeygenApi()
+			return eddsa.KeygenApi()
 		}
 	case "eddsa_cosmos":
 		{
@@ -170,7 +168,7 @@ func SignAPI(scheme string, sk []byte, mes []byte) []byte {
 	}
 }
 
-func VerifyApi(scheme string, pk []byte, mes []byte, sig []byte) bool {
+func VerifyAPI(scheme string, pk []byte, mes []byte, sig []byte) bool {
 	var result bool
 	switch scheme {
 	case "bls":

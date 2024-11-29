@@ -102,7 +102,7 @@ func verifyAPIWrapper() js.Func {
 		pk := []byte(args[1].String())
 		mes := []byte(args[2].String())
 		sig := []byte(args[3].String())
-		result := signature.VerifyApi(scheme, pk, mes, sig)
+		result := signature.VerifyAPI(scheme, pk, mes, sig)
 		return result
 	})
 }

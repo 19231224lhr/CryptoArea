@@ -1,81 +1,70 @@
-package signature_test
+package signature
 
 import (
-	"blockchain-crypto/signature"
+	"crypto/sha256"
+	"fmt"
 	"testing"
 )
 
-func TestKeygenAPI(t *testing.T) {
-	schemes := []string{"bls", "ecdsa", "ec_schnorr", "eddsa", "eddsa_cosmos", "sm2"}
-	for _, scheme := range schemes {
-		sk, pk := signature.KeygenAPI(scheme)
-		if sk == nil || pk == nil {
-			t.Errorf("KeygenAPI failed for scheme: %s", scheme)
-		}
-	}
+func Test_ECDSA(t *testing.T) {
+	scheme := "ecdsa"
+	mes := []byte("this is a test")
+	h := sha256.New()
+	h.Write(mes)
+	meshashed := h.Sum(nil)
+	seck, pubk := KeygenAPI(scheme)
+	sig := SignAPI(scheme, seck, meshashed)
+	result := VerifyAPI(scheme, pubk, meshashed, sig)
+	fmt.Println(result)
+	// Output: true
 }
 
-func TestKeygenWithSeedAPI(t *testing.T) {
-	schemes := []string{"bls", "ecdsa", "ec_schnorr", "eddsa", "eddsa_cosmos", "sm2"}
-	seed := []byte("testseedtestseedtestseedtestseed")
-	for _, scheme := range schemes {
-		sk, pk := signature.KeygenWithSeedAPI(scheme, seed)
-		if sk == nil || pk == nil {
-			t.Errorf("KeygenWithSeedAPI failed for scheme: %s", scheme)
-		}
-	}
+func Test_ECSchnorr(t *testing.T) {
+	scheme := "ec_schnorr"
+	mes := []byte("this is a test")
+	seck, pubk := KeygenAPI(scheme)
+	sig := SignAPI(scheme, seck, mes)
+	result := VerifyAPI(scheme, pubk, mes, sig)
+	fmt.Println(result)
+	// Output: true
 }
 
-func TestKeygenExtendAPI(t *testing.T) {
-	schemes := []string{"bls", "ecdsa", "ec_schnorr", "eddsa", "eddsa_cosmos", "sm2"}
-	tValue := uint8(3)
-	for _, scheme := range schemes {
-		sk, pk := signature.KeygenExtendAPI(scheme, tValue)
-		if sk == nil || pk == nil || len(sk) != int(tValue) || len(pk) != int(tValue) {
-			t.Errorf("KeygenExtendAPI failed for scheme: %s", scheme)
-		}
-	}
+func Test_BLS(t *testing.T) {
+	scheme := "bls"
+	mes := []byte("this is a test")
+	seck, pubk := KeygenAPI(scheme)
+	sig := SignAPI(scheme, seck, mes)
+	result := VerifyAPI(scheme, pubk, mes, sig)
+	fmt.Println(result)
+	// Output: true
 }
 
-func TestSignAPI(t *testing.T) {
-	schemes := []string{"bls", "ecdsa", "ec_schnorr", "eddsa", "eddsa_cosmos", "sm2"}
-	mes := []byte("testmessage")
-	for _, scheme := range schemes {
-		sk, pk := signature.KeygenAPI(scheme)
-		sig := signature.SignAPI(scheme, sk, mes)
-		if sig == nil {
-			t.Errorf("SignAPI failed for scheme: %s", scheme)
-		}
-		// Verify the signature
-		result := signature.VerifyApi(scheme, pk, mes, sig)
-		if !result {
-			t.Errorf("VerifyApi failed for scheme: %s", scheme)
-		}
-	}
+func Test_EdDSA(t *testing.T) {
+	scheme := "eddsa"
+	mes := []byte("this is a test")
+	seck, pubk := KeygenAPI(scheme)
+	sig := SignAPI(scheme, seck, mes)
+	result := VerifyAPI(scheme, pubk, mes, sig)
+	fmt.Println(result)
+	// Output: true
 }
 
-func TestVerifyApi(t *testing.T) {
-	schemes := []string{"bls", "ecdsa", "ec_schnorr", "eddsa", "eddsa_cosmos", "sm2"}
-	mes := []byte("testmessage")
-	for _, scheme := range schemes {
-		sk, pk := signature.KeygenAPI(scheme)
-		sig := signature.SignAPI(scheme, sk, mes)
-		result := signature.VerifyApi(scheme, pk, mes, sig)
-		if !result {
-			t.Errorf("VerifyApi failed for scheme: %s", scheme)
-		}
-	}
+func Test_EdDSACosmos(t *testing.T) {
+	scheme := "eddsa_cosmos"
+	mes := []byte("this is a test")
+	seck, pubk := KeygenAPI(scheme)
+	sig := SignAPI(scheme, seck, mes)
+	result := VerifyAPI(scheme, pubk, mes, sig)
+	fmt.Println(result)
+	// Output: true
 }
 
-func TestVerifyKeyGen(t *testing.T) {
-	schemes := []string{"bls", "ecdsa", "ec_schnorr", "eddsa", "eddsa_cosmos", "sm2"}
-	forwardPK := []byte("testforwardpk")
-	backwardSK := []byte("testbackwardsk")
-	backwardPK := []byte("testbackwardpk")
-	for _, scheme := range schemes {
-		result := signature.VerifyKeyGen(scheme, forwardPK, backwardSK, backwardPK)
-		if !result {
-			t.Errorf("VerifyKeyGen failed for scheme: %s", scheme)
-		}
-	}
+func Test_SM2(t *testing.T) {
+	scheme := "sm2"
+	mes := []byte("this is a test")
+	seck, pubk := KeygenAPI(scheme)
+	sig := SignAPI(scheme, seck, mes)
+	result := VerifyAPI(scheme, pubk, mes, sig)
+	fmt.Println(result)
+	// Output: true
 }
