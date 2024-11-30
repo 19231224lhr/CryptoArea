@@ -1,70 +1,75 @@
 package signature
 
 import (
-	"crypto/sha256"
-	"fmt"
 	"testing"
 )
 
-func Test_ECDSA(t *testing.T) {
-	scheme := "ecdsa"
-	mes := []byte("this is a test")
-	h := sha256.New()
-	h.Write(mes)
-	meshashed := h.Sum(nil)
-	seck, pubk := KeygenAPI(scheme)
-	sig := SignAPI(scheme, seck, meshashed)
-	result := VerifyAPI(scheme, pubk, meshashed, sig)
-	fmt.Println(result)
-	// Output: true
+func Test_KeygenAPI(t *testing.T) {
+	schemes := []string{"bls", "ecdsa", "ec_schnorr", "eddsa", "eddsa_cosmos", "sm2"}
+	for _, scheme := range schemes {
+		sk, pk := KeygenAPI(scheme)
+		if sk == nil || pk == nil {
+			t.Errorf("KeygenAPI failed for scheme: %s", scheme)
+		}
+	}
 }
 
-func Test_ECSchnorr(t *testing.T) {
-	scheme := "ec_schnorr"
-	mes := []byte("this is a test")
-	seck, pubk := KeygenAPI(scheme)
-	sig := SignAPI(scheme, seck, mes)
-	result := VerifyAPI(scheme, pubk, mes, sig)
-	fmt.Println(result)
-	// Output: true
+func Test_KeygenWithSeedAPI(t *testing.T) {
+	schemes := []string{"bls", "ecdsa", "ec_schnorr", "eddsa", "eddsa_cosmos", "sm2"}
+	seed := []byte("testseedtestseedtestseedtestseed")
+	for _, scheme := range schemes {
+		sk, pk := KeygenWithSeedAPI(scheme, seed)
+		if sk == nil || pk == nil {
+			t.Errorf("KeygenWithSeedAPI failed for scheme: %s", scheme)
+		}
+	}
 }
 
-func Test_BLS(t *testing.T) {
-	scheme := "bls"
-	mes := []byte("this is a test")
-	seck, pubk := KeygenAPI(scheme)
-	sig := SignAPI(scheme, seck, mes)
-	result := VerifyAPI(scheme, pubk, mes, sig)
-	fmt.Println(result)
-	// Output: true
+func Test_KeygenExtendAPI(t *testing.T) {
+	schemes := []string{"bls", "ecdsa", "ec_schnorr", "eddsa", "eddsa_cosmos", "sm2"}
+	tValue := uint8(3)
+	for _, scheme := range schemes {
+		sks, pks := KeygenExtendAPI(scheme, tValue)
+		if len(sks) != int(tValue) || len(pks) != int(tValue) {
+			t.Errorf("KeygenExtendAPI failed for scheme: %s", scheme)
+		}
+	}
 }
 
-func Test_EdDSA(t *testing.T) {
-	scheme := "eddsa"
-	mes := []byte("this is a test")
-	seck, pubk := KeygenAPI(scheme)
-	sig := SignAPI(scheme, seck, mes)
-	result := VerifyAPI(scheme, pubk, mes, sig)
-	fmt.Println(result)
-	// Output: true
+func Test_SignAPI(t *testing.T) {
+	schemes := []string{"bls", "ecdsa", "ec_schnorr", "eddsa", "eddsa_cosmos", "sm2"}
+	message := []byte("this is a test")
+	for _, scheme := range schemes {
+		sk, _ := KeygenAPI(scheme)
+		sig := SignAPI(scheme, sk, message)
+		if sig == nil {
+			t.Errorf("SignAPI failed for scheme: %s", scheme)
+		}
+	}
 }
 
-func Test_EdDSACosmos(t *testing.T) {
-	scheme := "eddsa_cosmos"
-	mes := []byte("this is a test")
-	seck, pubk := KeygenAPI(scheme)
-	sig := SignAPI(scheme, seck, mes)
-	result := VerifyAPI(scheme, pubk, mes, sig)
-	fmt.Println(result)
-	// Output: true
+func Test_VerifyAPI(t *testing.T) {
+	schemes := []string{"bls", "ecdsa", "ec_schnorr", "eddsa", "eddsa_cosmos", "sm2"}
+	message := []byte("this is a test")
+	for _, scheme := range schemes {
+		sk, pk := KeygenAPI(scheme)
+		sig := SignAPI(scheme, sk, message)
+		result := VerifyAPI(scheme, pk, message, sig)
+		if !result {
+			t.Errorf("VerifyAPI failed for scheme: %s", scheme)
+		}
+	}
 }
 
-func Test_SM2(t *testing.T) {
-	scheme := "sm2"
-	mes := []byte("this is a test")
-	seck, pubk := KeygenAPI(scheme)
-	sig := SignAPI(scheme, seck, mes)
-	result := VerifyAPI(scheme, pubk, mes, sig)
-	fmt.Println(result)
-	// Output: true
+func Test_VerifyKeyGen(t *testing.T) {
+	schemes := []string{"bls", "ecdsa", "ec_schnorr", "eddsa", "eddsa_cosmos", "sm2"}
+	seed := []byte("testseedtestseedtestseedtestseed")
+	for _, scheme := range schemes {
+		forwardPK, _ := KeygenWithSeedAPI(scheme, seed)
+		backwardSK, backwardPK := KeygenWithSeedAPI(scheme, forwardPK)
+		result := VerifyKeyGen(scheme, forwardPK, backwardSK, backwardPK)
+		if !result {
+			t.Errorf("VerifyKeyGen failed for scheme: %s", scheme)
+		}
+	}
 }
