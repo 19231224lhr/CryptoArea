@@ -9,12 +9,40 @@
     <script>
         const go = new Go();
         WebAssembly.instantiateStreaming(
-            fetch("json.wasm"),
+            fetch("crypto.wasm"),
             go.importObject
         ).then((result) => {
             go.run(result.instance);
-            prettyJSON('{"user_id": "571401777717031","user_name": "代码与野兽","description": "关注real-time web、低代码、数据可视化、web3等领域。"}')
+            TestPrettyJSON('{"user_id": "571401777717031","user_name": "代码与野兽","description": "关注real-time web、低代码、数据可视化、web3等领域。"}')
         });
+    </script>
+    <script async type="text/javascript" src="pqc_sign.js"></script>
+    <script>
+        // 加载 WebAssembly 模块
+        var Module = {
+            onRuntimeInitialized: function() {
+                // 使用 cwrap 获取导出的函数
+                var add = Module.cwrap('test_add', 'number', ['number', 'number']);
+                console.log('Result of add(2, 3):', add(2, 3));
+
+                // 获取 C 函数的引用
+                const modifyArray = Module.cwrap('test_modify_array', null, ['number', 'number']);
+                // 创建一个 JavaScript 数组
+                const jsArray = [1, 2, 3, 4, 5];
+                const length = jsArray.length;
+                // 将 JavaScript 数组转换为 WebAssembly 可用的内存
+                const buffer = Module._malloc(jsArray.length * 4); // 每个元素 4 字节（int32）
+                Module.HEAP32.set(jsArray, buffer / 4); // 将数组复制到 WebAssembly 内存中
+                // 调用 C 函数
+                modifyArray(buffer, length);
+                // 从 WebAssembly 内存中读取修改后的数组
+                const resultArray = Module.HEAP32.subarray(buffer / 4, buffer / 4 + length);
+                // 打印结果
+                console.log('Modified array:', Array.from(resultArray));
+                // 释放内存
+                Module._free(buffer);
+            }
+        };
     </script>
 </head>
 <body></body>
