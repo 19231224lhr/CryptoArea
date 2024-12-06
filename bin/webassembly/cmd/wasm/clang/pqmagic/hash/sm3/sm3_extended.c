@@ -1,13 +1,14 @@
-#if                             \
-    (defined(__i386__))     ||  \
-    (defined(__x86_64__))   ||  \
-    (defined(__arm__))      ||  \
-    (defined(__aarch64__))
+//#if                             \
+//    (defined(__i386__))     ||  \
+//    (defined(__x86_64__))   ||  \
+//    (defined(__arm__))      ||  \
+//    (defined(__aarch64__))
 #include "x86-64/include/sm3.h"
-#else
-#error "Now only support for ref version."
-#endif
+//#else
+//#error "Now only support for ref version."
+//#endif
 #include "include/sm3_extended.h"
+#include <stdlib.h>  // 包含malloc函数的标准库
 
 #define add_nonce(out, nonce)                   \
     do{                                         \

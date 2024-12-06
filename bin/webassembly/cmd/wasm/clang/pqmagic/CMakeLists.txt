@@ -247,7 +247,7 @@ foreach(lib_path ${SUPPORT_ALG_STATIC_TARGET_PATH})
 endforeach()
 file(APPEND ${CMAKE_BINARY_DIR}/ar_script.mri "ADDLIB ${SM3_LIB_PATH}/libsm3.a\n")
 file(APPEND ${CMAKE_BINARY_DIR}/ar_script.mri "ADDLIB ${FIPS202_LIB_PATH}/libfips202.a\n")
-file(APPEND ${CMAKE_BINARY_DIR}/ar_script.mri "ADDLIB ${RANDOMBYTES_LIB_PATH}/librandombytes.a>\n")
+file(APPEND ${CMAKE_BINARY_DIR}/ar_script.mri "ADDLIB ${RANDOMBYTES_LIB_PATH}/librandombytes.a\n")
 file(APPEND ${CMAKE_BINARY_DIR}/ar_script.mri "SAVE\nEND\n")
 
 # Set a custom target for static library

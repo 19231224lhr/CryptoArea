@@ -3,17 +3,38 @@
 ## 环境准备
 1.  gcc
 2.  cmake
-3.  编译器推荐CLoin
+3.  IDE推荐CLoin
+4. 编译器使用Emscripten,参见 [官方文档](https://emscripten.org/docs/introducing_emscripten/index.html)
 
- ## 编译PQMagic库
+## 测试编译
+ ### 1. 测试PQMagic库
+- 切换到linux分支
+- 安装pqmagic依赖
 ```shell
 cd  pqmagic && mkdir build && cd build
 cmake -DCMAKE_INSTALL_PREFIX=../../libs -DUSE_SM3=OFF -DUSE_SHAKE=ON  -DENABLE_KYBER=OFF -DENABLE_ML_KEM=OFF  -DENABLE_AIGIS_ENC=OFF -DENABLE_TEST=OFF -DENABLE_BENCH=OFF ..
 make && make install
 
 ```
+- 回到主目录
+```shell
+ mkdir build && cd build
+ cmake .. && make 
+```
+-  执行test_wrapper测试
 
-### 提示词
+### 2.编译到wasm库
+- 切换到wasm分支
+- 编译pqmagic库
+```shell
+cd  pqmagic && mkdir build && cd build
+emcc cmake -DCMAKE_INSTALL_PREFIX=../../libs -DUSE_SM3=OFF -DUSE_SHAKE=ON  -DENABLE_KYBER=OFF -DENABLE_ML_KEM=OFF  -DENABLE_AIGIS_ENC=OFF -DENABLE_TEST=OFF -DENABLE_BENCH=OFF ..
+emcc make && sudo emcc make install
+```
+- 
+### 乱其八糟
+
+#### 1. GPT提示词备份
 
 在我的/usr/local/lib下存在以下文件:> tree -L 4
 .
