@@ -7,6 +7,11 @@ project(PQMagic)
 set(CMAKE_BUILD_TYPE Release)
 set(CMAKE_C_STANDARD 11)
 
+# Use Emscripten compiler
+set(CMAKE_C_COMPILER emcc)
+set(CMAKE_AR emar)
+set(CMAKE_RANLIB emranlib)
+
 # Select PQMagic Version.
 # Open Source Version Only Support PQMagic-std.
 set(PQMAGIC_VERSION "std" CACHE STRING "Set PQMagic version")
@@ -99,12 +104,17 @@ message(STATUS "Hash Component: SHAKE")
 endif()
 
 # Set global compile options
-add_compile_options(
-    -Wall -Wextra -Wpedantic -Wmissing-prototypes -Wredundant-decls -Wshadow -fPIC
-    -Wpointer-arith -Wa,--noexecstack -fomit-frame-pointer -O3 -mtune=native
-    -march=native
-)
-
+if(NOT CMAKE_C_COMPILER_ID STREQUAL "Emscripten")
+    add_compile_options(
+        -Wall -Wextra -Wpedantic -Wmissing-prototypes -Wredundant-decls -Wshadow -fPIC
+        -Wpointer-arith -Wa,--noexecstack -fomit-frame-pointer -O3 -mtune=native
+    )
+else()
+    add_compile_options(
+        -Wall -Wextra -Wpedantic -Wmissing-prototypes -Wredundant-decls -Wshadow -fPIC
+        -Wpointer-arith -Wa,--noexecstack -fomit-frame-pointer -O3
+    )
+endif()
 #################################
 # Project library build setting #
 #################################

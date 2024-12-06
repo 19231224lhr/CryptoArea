@@ -9,3 +9,4 @@
 #define SPX_NAMESPACE(s) XCONCAT5(pqmagic_sphincs_a, SPHINCS_A_HASH_MODE_NAMESPACE, THASH, std, s)
 
 #endif
+

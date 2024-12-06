@@ -155,3 +155,19 @@ int VerifyKeyGen(SignAlgType scheme, const uint8_t *fsk, const uint8_t *bsk, con
     free(seed);
     return ret;
 }
+
+// just for js invoke test only
+void test_modify_array(int32_t *arr, int length) {
+    for (int i = 0; i < length; i++) {
+        arr[i] *= 2;  // 将数组元素值乘以2
+    }
+}
+
+int test_add(int a, int b) {
+    return a + b;
+}
+
+int main() {
+    printf("C WebAssembly Initialized.\n");
+    return 0;
+}
