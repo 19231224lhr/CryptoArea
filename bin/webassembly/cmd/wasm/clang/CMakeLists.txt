@@ -3,11 +3,11 @@ cmake_minimum_required(VERSION 3.10)
 # Set the project name
 project(PQC_Signature LANGUAGES C)
 
-# 使用 Emscripten 编译器
-set(CMAKE_C_COMPILER emcc)
+# 使用 Emscripten 编译器 *注意：这里的路径需要根据实际情况修改
+set(CMAKE_C_COMPILER /home/teddycode/Desktop/tools/emsdk/upstream/emscripten/emcc)
 # 编译选项
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -s EXPORTED_FUNCTIONS='['_keyGen', '_keyGenWithSeed', '_sign', '_verify', '_VerifyKeyGen', '_test_modify_array', '_test_add', '_malloc', '_free']'")
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -s EXPORTED_RUNTIME_METHODS='['ccall', 'cwrap']'")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -s EXPORTED_FUNCTIONS='[\"_keyGen\", \"_keyGenWithSeed\", \"_sign\", \"_verify\",\"_VerifyKeyGen\", \"_test_modify_array\", \"_test_add\", \"_malloc\", \"_free\"]'")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -s EXPORTED_RUNTIME_METHODS='[\"ccall\", \"cwrap\"]'")
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -s MODULARIZE=1 -s ENVIRONMENT=web")
 
 # Add the source files
@@ -32,6 +32,25 @@ add_executable(test_wrapper test_wrapper.c pqcsign_wrapper.c fips202.c)
 # add all libraries into the project
 file(GLOB LIB_FILES "libs/lib/*.a" "libs/lib/*.so")
 
+# 添加链接选项
+target_link_options(pqcsign_wrapper PRIVATE
+        "-s EXPORTED_FUNCTIONS='[\"_keyGen\", \"_keyGenWithSeed\", \"_sign\", \"_verify\",\"_VerifyKeyGen\", \"_test_modify_array\", \"_test_add\", \"_malloc\", \"_free\"]'"
+        "-s EXPORTED_RUNTIME_METHODS='[\"ccall\", \"cwrap\"]'"
+        "-s MODULARIZE=1"
+        "-s ENVIRONMENT=web"
+)
+
+target_link_options(test_wrapper  PRIVATE
+        "-s EXPORTED_FUNCTIONS='[\"_main\", \"_malloc\", \"_free\"]'"
+        "-s EXPORTED_RUNTIME_METHODS='[\"ccall\", \"cwrap\"]'"
+        "-s MODULARIZE=1"
+        "-s ENVIRONMENT=web"
+)
+
 # Link libraries
 target_link_libraries(pqcsign_wrapper ${LIB_FILES})
 target_link_libraries(test_wrapper ${LIB_FILES})
+
+# Install the executables to the specified folder
+set(INSTALL_DIR "${CMAKE_BINARY_DIR}/../../../../assets")
+install(TARGETS pqcsign_wrapper test_wrapper RUNTIME DESTINATION ${INSTALL_DIR})

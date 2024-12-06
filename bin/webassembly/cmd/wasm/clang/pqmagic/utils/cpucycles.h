@@ -52,3 +52,4 @@ static inline uint64_t cpucycles(void) {
 uint64_t cpucycles_overhead(void);
 
 #endif
+

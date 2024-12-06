@@ -8,3 +8,4 @@
 void genmatrix(polyvec *a, const uint8_t *seed, int transposed);
 
 #endif
+

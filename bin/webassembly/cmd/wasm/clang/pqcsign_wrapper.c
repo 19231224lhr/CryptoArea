@@ -167,7 +167,3 @@ int test_add(int a, int b) {
     return a + b;
 }
 
-int main() {
-    printf("C WebAssembly Initialized.\n");
-    return 0;
-}
