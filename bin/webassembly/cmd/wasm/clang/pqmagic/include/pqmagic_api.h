@@ -640,12 +640,12 @@ int pqmagic_aigis_sig3_std_keypair(unsigned char *pk, unsigned char *sk);
 int pqmagic_aigis_sig3_std_keypair_internal(unsigned char *pk,  unsigned char *sk, const unsigned char *coins);
 
 // return 0 if success, or return error code (neg number).
-int pqmagic_aigis_sig3_std_signature(unsigned char *sm, size_t *smlen, 
-                                     const unsigned char *m, size_t mlen, 
+int pqmagic_aigis_sig3_std_signature_internal(unsigned char *sm, size_t *smlen,
+                                     const unsigned char *m, size_t mlen,
                                      const unsigned char *sk);
 
 // return 0/1 if verification failed/success, or return error code (neg number).
-int pqmagic_aigis_sig3_std_verify(const unsigned char *sm, size_t smlen,
+int pqmagic_aigis_sig3_std_verify_internal(const unsigned char *sm, size_t  smlen,
                                   const unsigned char *m, size_t mlen,
                                   const unsigned char *pk);
 

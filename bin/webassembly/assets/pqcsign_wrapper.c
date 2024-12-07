@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
-#include <stddef.h>
 #include "pqcsign_wrapper.h"
 #include <string.h>
 #include "./pqmagic/utils/randombytes.h"
@@ -65,7 +64,7 @@ int sign(SignAlgType scheme, uint8_t *sig, size_t *siglen, const uint8_t *m, siz
     int ret = 0;
     switch (scheme) {
         case AIGIS_SIG:
-            ret =  pqmagic_aigis_sig3_std_signature_internal(sig, siglen, m, mlen, sk);
+            ret =  pqmagic_aigis_sig3_std_signature(sig, siglen, m, mlen, sk);
             break;
         case DILITHIUM:
             ret =  pqmagic_dilithium3_std_signature(sig, siglen, m, mlen, sk);
@@ -90,7 +89,7 @@ int verify(SignAlgType scheme, const uint8_t *sig, size_t siglen, const uint8_t 
     int ret = 0;
     switch (scheme) {
         case AIGIS_SIG:
-            ret =  pqmagic_aigis_sig3_std_verify_internal(sig, siglen, m, mlen, pk);
+            ret =  pqmagic_aigis_sig3_std_verify(sig, siglen, m, mlen, pk);
             break;
         case DILITHIUM:
             ret = pqmagic_dilithium3_std_verify(sig, siglen, m, mlen, pk);

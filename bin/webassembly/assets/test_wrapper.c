@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
-#include <stddef.h>  // 添加这个头文件
 #include <string.h>
 #include "pqcsign_wrapper.h"
 #include "pqmagic/utils/randombytes.h"
@@ -30,7 +29,7 @@ int main() {
     // TODO aigis verify failure
 
     for (int i = 0; i < 4; i++) {
-        uint8_t  *message[MLEN] ;
+        char *message[MLEN] ;
         randombytes(message,MLEN);
         size_t mlen = strlen(message);
         uint8_t *pk = malloc(public_key_bytes[i]);
