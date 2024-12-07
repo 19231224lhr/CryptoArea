@@ -7,6 +7,8 @@
 #include "./pqmagic/utils/randombytes.h"
 #include "fips202.h"
 
+#define MAX_SEED_LEN 72
+
 size_t public_key_bytes[4] = {
     AIGIS_SIG3_PUBLICKEYBYTES, DILITHIUM3_PUBLICKEYBYTES, ML_DSA_65_PUBLICKEYBYTES,
     SLH_DSA_SHAKE_192f_PUBLICKEYBYTES
@@ -34,28 +36,28 @@ int keyGen(SignAlgType scheme, uint8_t *pk, uint8_t *sk) {
     }
 }
 
-int keyGenWithSeed(SignAlgType scheme, uint8_t *pk, uint8_t *sk, const uint8_t *seed) {
-    uint8_t *seedhash = malloc(32);
-    uint8_t ret = 0;
-    sha3_256(seedhash,seed,secret_key_bytes[scheme]);
+int keyGenWithSeed(SignAlgType scheme, uint8_t *pk, uint8_t *sk, const uint8_t *presk) {
+    uint8_t *seed = malloc(MAX_SEED_LEN);
+    int ret = 0;
+    sha3_512(seed,presk,secret_key_bytes[scheme]);
     switch (scheme) {
         case AIGIS_SIG:
-            ret = pqmagic_aigis_sig3_std_keypair_internal(pk, sk,seedhash);
+            ret = pqmagic_aigis_sig3_std_keypair_internal(pk, sk,seed);
             break;
         case DILITHIUM:
-            ret =  pqmagic_dilithium3_std_keypair_internal(pk, sk,seedhash);
+            ret =  pqmagic_dilithium3_std_keypair_internal(pk, sk,seed);
             break;
         case ML_DSA:
-            ret =  pqmagic_ml_dsa_65_std_keypair_internal(pk, sk, seedhash);
+            ret =  pqmagic_ml_dsa_65_std_keypair_internal(pk, sk, seed);
             break;
         case SLH_DSA:
-            ret = pqmagic_slh_dsa_shake_192f_simple_std_sign_seed_keypair(pk, sk,seedhash);
+            ret = pqmagic_slh_dsa_shake_192f_simple_std_sign_seed_keypair(pk, sk, seed);
             break;
         default:
             ret =  -1;
             break;
     }
-    free(seedhash);
+    free(seed);
     return ret;
 }
 
@@ -113,9 +115,9 @@ int verify(SignAlgType scheme, const uint8_t *sig, size_t siglen, const uint8_t 
 int VerifyKeyGen(SignAlgType scheme, const uint8_t *fsk, const uint8_t *bsk, const uint8_t *bpk) {
     uint8_t *tpk = malloc(public_key_bytes[scheme]);
     uint8_t *tsk = malloc(secret_key_bytes[scheme]);
-    uint8_t *seed = malloc(32);
+    uint8_t *seed = malloc(MAX_SEED_LEN);
     int ret = 0;
-    sha3_256(seed,fsk,secret_key_bytes[scheme]);
+    sha3_512(seed,fsk,secret_key_bytes[scheme]);
     switch (scheme) {
         case AIGIS_SIG:
             if (pqmagic_aigis_sig3_std_keypair_internal(tpk,tsk,seed) != 0) {

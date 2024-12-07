@@ -30,9 +30,9 @@ int main() {
     // TODO aigis verify failure
 
     for (int i = 0; i < 4; i++) {
-        uint8_t  *message[MLEN] ;
+        uint8_t  *message = malloc(MLEN) ;
         randombytes(message,MLEN);
-        size_t mlen = strlen(message);
+        size_t mlen = MLEN;
         uint8_t *pk = malloc(public_key_bytes[i]);
         uint8_t *sk = malloc(secret_key_bytes[i]);
         uint8_t *sig = malloc(signature_bytes[i]);
@@ -102,6 +102,7 @@ int main() {
         free(sk);
         free(tsk);
         free(sig);
+        free(message);
     }
 
     return 0;

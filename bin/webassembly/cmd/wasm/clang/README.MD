@@ -6,24 +6,9 @@
 3.  IDE推荐CLoin
 4. 编译器使用Emscripten,参见 [官方文档](https://emscripten.org/docs/introducing_emscripten/index.html)
 
-## 测试编译
- ### 1. 测试PQMagic库
-- 切换到linux分支
-- 安装pqmagic依赖
-```shell
-cd  pqmagic && mkdir build && cd build
-cmake -DCMAKE_INSTALL_PREFIX=../../libs -DUSE_SM3=OFF -DUSE_SHAKE=ON  -DENABLE_KYBER=OFF -DENABLE_ML_KEM=OFF  -DENABLE_AIGIS_ENC=OFF -DENABLE_TEST=OFF -DENABLE_BENCH=OFF ..
-make && make install
-
-```
-- 回到主目录
-```shell
- mkdir build && cd build
- cmake .. && make 
-```
--  执行test_wrapper测试
-
-### 2.编译到wasm库
+## 编译测试
+> 需要执行两次编译,一个是编译pqmagic库,一个是编译pqcsign_wrapper.c
+### 1.编译pqmagic库
 - 切换到wasm分支
 - 编译pqmagic库
 ```shell
@@ -31,7 +16,22 @@ cd  pqmagic && mkdir build && cd build
 emmake  cmake -DCMAKE_INSTALL_PREFIX=../../libs -DUSE_SM3=OFF -DUSE_SHAKE=ON  -DENABLE_KYBER=OFF -DENABLE_ML_KEM=OFF  -DENABLE_AIGIS_ENC=OFF -DENABLE_TEST=OFF -DENABLE_BENCH=OFF ..
 emmake  make &&  emmake  make install
 ```
-- 
+编译完成后,在libs目录下会生成libpqmagic.a等库文件
+### 2.编译pqcsign_wrapper.c
+```shell
+cd clang
+./build.sh
+```
+### 3.在浏览器中测试
+```shell
+cd ../../server
+go run main.go
+
+```
+打开浏览器,访问[http://localhost:9090/test_wrapper.html](http://localhost:9090/test_wrapper.html) 可以看到输出
+
+```shell
+
 ### 乱其八糟
 
 #### 1. GPT提示词备份
