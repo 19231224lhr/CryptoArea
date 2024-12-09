@@ -15,6 +15,10 @@ cp "$(go env GOROOT)/misc/wasm/wasm_exec.js" ~/go/bin/webassembly/assets/
 ```shell
 git clone ...
 ```
+3. others
+ - Git
+ - Python 3
+- Node.js
 
 ### 1. 编译wasm
 

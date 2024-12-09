@@ -8,6 +8,8 @@
     ML-DSA API START
 */
 
+#define  ML_DSA_SEEDBYTES 32
+
 #define ML_DSA_44_PUBLICKEYBYTES   1312
 #define ML_DSA_44_SECRETKEYBYTES   2560
 #define ML_DSA_44_SIGBYTES         2420
@@ -586,6 +588,8 @@ int pqmagic_slh_dsa_sm3_128s_simple_std_sign_open(unsigned char *m, size_t *mlen
     AIGIS_SIG API START
 */
 
+#define AIGIS_SEEDBYTES 32
+
 #define AIGIS_SIG1_PUBLICKEYBYTES   1056
 #define AIGIS_SIG1_SECRETKEYBYTES   2448
 #define AIGIS_SIG1_SIGBYTES         1852
@@ -657,6 +661,8 @@ int pqmagic_aigis_sig3_std_verify_internal(const unsigned char *sm, size_t  smle
 /*
     DILITHIUM API START
 */
+
+#define DILITHUM_SEEDBYTES 32
 
 #define DILITHIUM2_PUBLICKEYBYTES   1312
 #define DILITHIUM2_SECRETKEYBYTES   2528
