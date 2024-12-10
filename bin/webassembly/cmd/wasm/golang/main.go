@@ -13,6 +13,6 @@ func main() {
 	js.Global().Set("KeygenExtendAPI", keygenExtendAPIWrapper())
 	js.Global().Set("SignAPI", signAPIWrapper())
 	js.Global().Set("VerifyAPI", verifyAPIWrapper())
-	js.Global().Set("VerifyKeyGen", verifyKeyGenWrapper())
+	js.Global().Set("VerifyKeyGenAPI", verifyKeyGenWrapper())
 	<-make(chan bool)
 }

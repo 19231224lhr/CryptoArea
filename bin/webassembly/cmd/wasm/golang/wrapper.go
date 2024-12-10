@@ -2,6 +2,7 @@ package main
 
 import (
 	"blockchain-crypto/signature"
+	"encoding/hex"
 	"encoding/json"
 	"fmt"
 	"syscall/js"
@@ -15,8 +16,8 @@ func keygenAPIWrapper() js.Func {
 		scheme := args[0].String()
 		sk, pk := signature.KeygenAPI(scheme)
 		return map[string]interface{}{
-			"sk": sk,
-			"pk": pk,
+			"sk": hex.EncodeToString(sk),
+			"pk": hex.EncodeToString(pk),
 		}
 	})
 }
@@ -27,13 +28,18 @@ func keygenWithSeedAPIWrapper() js.Func {
 			return "Invalid number of arguments passed"
 		}
 		scheme := args[0].String()
-		seed := []byte(args[1].String())
+		seedHex := args[1].String()
 		println("scheme", scheme)
-		println("seed", seed)
+		println("seed", seedHex)
+		seed, err := hex.DecodeString(seedHex)
+		if err != nil {
+			fmt.Println("Error decoding hex string:", err)
+			return nil
+		}
 		sk, pk := signature.KeygenWithSeedAPI(scheme, seed)
 		return map[string]interface{}{
-			"sk": sk,
-			"pk": pk,
+			"sk": hex.EncodeToString(sk),
+			"pk": hex.EncodeToString(pk),
 		}
 	})
 }
@@ -46,7 +52,7 @@ func keygenExtendAPIWrapper() js.Func {
 		scheme := args[0].String()
 		tValue := uint8(args[1].Int())
 		sk, pk := signature.KeygenExtendAPI(scheme, tValue)
-		return map[string]interface{}{
+		return map[string]interface{}{ // TODO encode to hex
 			"sk": sk,
 			"pk": pk,
 		}
@@ -59,10 +65,21 @@ func signAPIWrapper() js.Func {
 			return "Invalid number of arguments passed"
 		}
 		scheme := args[0].String()
-		sk := []byte(args[1].String())
-		mes := []byte(args[2].String())
+		mesHex := args[1].String()
+		skHex := args[2].String()
+		sk, err := hex.DecodeString(skHex)
+		if err != nil {
+			fmt.Println("Error decoding hex string:", err)
+			return nil
+		}
+		mes, err := hex.DecodeString(mesHex)
+		if err != nil {
+			fmt.Println("Error decoding hex string:", err)
+			return nil
+		}
 		sig := signature.SignAPI(scheme, sk, mes)
-		return sig
+		fmt.Printf("scheme:%s, sk:%s, mes:%s, sig:%s\n", scheme, skHex, mesHex, hex.EncodeToString(sig))
+		return hex.EncodeToString(sig)
 	})
 }
 
@@ -72,9 +89,25 @@ func verifyAPIWrapper() js.Func {
 			return "Invalid number of arguments passed"
 		}
 		scheme := args[0].String()
-		pk := []byte(args[1].String())
-		mes := []byte(args[2].String())
-		sig := []byte(args[3].String())
+		mesHex := args[1].String()
+		sigHex := args[2].String()
+		pkHex := args[3].String()
+		pk, err := hex.DecodeString(pkHex)
+		if err != nil {
+			fmt.Println("Error decoding hex string:", err)
+			return nil
+		}
+		mes, err := hex.DecodeString(mesHex)
+		if err != nil {
+			fmt.Println("Error decoding hex string:", err)
+			return nil
+		}
+		sig, err := hex.DecodeString(sigHex)
+		if err != nil {
+			fmt.Println("Error decoding hex string:", err)
+			return nil
+		}
+		fmt.Printf("scheme:%s, pk:%s, mes:%s, sig:%s\n", scheme, pkHex, mesHex, sigHex)
 		result := signature.VerifyAPI(scheme, pk, mes, sig)
 		return result
 	})
@@ -86,9 +119,24 @@ func verifyKeyGenWrapper() js.Func {
 			return "Invalid number of arguments passed"
 		}
 		scheme := args[0].String()
-		forwardPK := []byte(args[1].String())
-		backwardSK := []byte(args[2].String())
-		backwardPK := []byte(args[3].String())
+		forwardPKHex := args[1].String()
+		backwardSKHex := args[2].String()
+		backwardPKHex := args[3].String()
+		forwardPK, err := hex.DecodeString(forwardPKHex)
+		if err != nil {
+			fmt.Println("Error decoding hex string:", err)
+			return nil
+		}
+		backwardSK, err := hex.DecodeString(backwardSKHex)
+		if err != nil {
+			fmt.Println("Error decoding hex string:", err)
+			return nil
+		}
+		backwardPK, err := hex.DecodeString(backwardPKHex)
+		if err != nil {
+			fmt.Println("Error decoding hex string:", err)
+			return nil
+		}
 		result := signature.VerifyKeyGen(scheme, forwardPK, backwardSK, backwardPK)
 		return result
 	})
