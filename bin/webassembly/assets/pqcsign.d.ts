@@ -27,7 +27,7 @@ declare namespace RuntimeExports {
 }
 interface WasmModule {
   _keyGen(_0: number, _1: number, _2: number): number;
-  _keyGenWithSeed(_0: number, _1: number, _2: number, _3: number): number;
+  _keyGenWithSeed(_0: number, _1: number, _2: number, _3: number, _4: number): number;
   _malloc(_0: number): number;
   _free(_0: number): void;
   _sign(_0: number, _1: number, _2: number, _3: number, _4: number, _5: number): number;

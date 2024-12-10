@@ -59,7 +59,7 @@ int main() {
 
         printf("Testing keyGenWithSeed with scheme %d\n", schemes[i]);
         // Key generation with seed
-        ret = keyGenWithSeed(schemes[i], tpk, tsk, sk);
+        ret = keyGenWithSeed(schemes[i], tpk, tsk, pk, public_key_bytes[i]);
         if (ret  != 0) {
             printf("Key generation with seed failed for scheme %d, error code: %d\n", schemes[i],ret);
             free(pk);

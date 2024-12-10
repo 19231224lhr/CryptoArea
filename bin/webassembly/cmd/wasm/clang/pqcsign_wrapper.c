@@ -53,10 +53,10 @@ int keyGen(int scheme, uint8_t *pk, uint8_t *sk) {
     return ret;
 }
 
-int keyGenWithSeed(int scheme, uint8_t *pk, uint8_t *sk, const uint8_t *presk) {
+int keyGenWithSeed(int scheme, uint8_t *pk, uint8_t *sk, const uint8_t *prepk, size_t prepklen) {
     uint8_t *seed = malloc(MAX_SEED_LEN);
     int ret = 0;
-    sha3_512(seed, presk, secret_key_bytes[scheme]);
+    sha3_512(seed, prepk, prepklen);
     switch (scheme) {
         case AIGIS_SIG:
             ret = pqmagic_aigis_sig3_std_keypair_internal(pk, sk, seed);
