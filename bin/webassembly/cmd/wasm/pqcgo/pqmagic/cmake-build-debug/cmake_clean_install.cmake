@@ -1,7 +1,0 @@
-if(EXISTS /usr/local)
-    message(STATUS "Removing installed files from /usr/local...")
-    execute_process(COMMAND /home/teddycode/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/bin/cmake -E remove_directory /usr/local/bin)
-    execute_process(COMMAND /home/teddycode/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/bin/cmake -E remove_directory /usr/local/lib)
-    execute_process(COMMAND /home/teddycode/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/bin/cmake -E remove_directory /usr/local/include)
-endif()
-message(STATUS "Installed files removed.")

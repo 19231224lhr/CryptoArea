@@ -1,6 +1,0 @@
-CREATE libpqmagic_kyber_std.a
-ADDLIB libkyber_static_2.a
-ADDLIB libkyber_static_3.a
-ADDLIB libkyber_static_4.a
-SAVE
-END

@@ -1,7 +1,0 @@
-CREATE libpqmagic_aigis_enc_std.a
-ADDLIB libaigis_enc_static_1.a
-ADDLIB libaigis_enc_static_2.a
-ADDLIB libaigis_enc_static_3.a
-ADDLIB libaigis_enc_static_4.a
-SAVE
-END
