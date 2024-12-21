@@ -1,0 +1,6 @@
+CREATE libpqmagic_ml_kem_std.a
+ADDLIB libml_kem_static_512.a
+ADDLIB libml_kem_static_768.a
+ADDLIB libml_kem_static_1024.a
+SAVE
+END

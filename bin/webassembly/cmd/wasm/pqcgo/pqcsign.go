@@ -2,46 +2,46 @@ package pqcgo
 
 /*
 #cgo CFLAGS: -I${SRCDIR}/libs/include
-#cgo LDFLAGS: ${SRCDIR}/libs/lib/libpqmagic.a
+#cgo windows LDFLAGS: ${SRCDIR}/libs/lib/win/libpqmagic.a
+#cgo linux LDFLAGS: ${SRCDIR}/libs/lib/linux/libpqmagic.a
 #include <stdint.h>
 #include <stdlib.h>
 #include "./pqcsign_wrapper.h"
 */
 import "C"
 import (
-	"encoding/hex"
 	"errors"
 	"unsafe"
 )
 
-func KeyGen(scheme int) (string, string, error) {
+func KeyGen(scheme int) ([]byte, []byte, error) {
 	pk := make([]byte, PUBLICKEYBYTES[scheme])
 	sk := make([]byte, SECRETKEYBYTES[scheme])
 	ret := C.keyGen(C.int(scheme), (*C.uint8_t)(unsafe.Pointer(&pk[0])), (*C.uint8_t)(unsafe.Pointer(&sk[0])))
 	if ret != 0 {
-		return "", "", errors.New("key generation failed")
+		return nil, nil, errors.New("key generation failed")
 	}
-	return hex.EncodeToString(pk), hex.EncodeToString(sk), nil
+	return pk, sk, nil
 }
 
-func KeyGenWithSeed(scheme int, seed []byte) (string, string, error) {
+func KeyGenWithSeed(scheme int, seed []byte) ([]byte, []byte, error) {
 	pk := make([]byte, PUBLICKEYBYTES[scheme])
 	sk := make([]byte, SECRETKEYBYTES[scheme])
 	ret := C.keyGenWithSeed(C.int(scheme), (*C.uint8_t)(unsafe.Pointer(&pk[0])), (*C.uint8_t)(unsafe.Pointer(&sk[0])), (*C.uint8_t)(unsafe.Pointer(&seed[0])), C.size_t(len(seed)))
 	if ret != 0 {
-		return "", "", errors.New("key generation with seed failed")
+		return nil, nil, errors.New("key generation with seed failed")
 	}
-	return hex.EncodeToString(pk), hex.EncodeToString(sk), nil
+	return pk, sk, nil
 }
 
-func Sign(scheme int, message []byte, sk []byte) (string, error) {
+func Sign(scheme int, message []byte, sk []byte) ([]byte, error) {
 	sig := make([]byte, SIGNATUREBYTES[scheme]+10)
 	siglen := C.size_t(0)
 	ret := C.sign(C.int(scheme), (*C.uint8_t)(unsafe.Pointer(&sig[0])), &siglen, (*C.uint8_t)(unsafe.Pointer(&message[0])), C.size_t(len(message)), (*C.uint8_t)(unsafe.Pointer(&sk[0])))
 	if ret != 0 {
-		return "", errors.New("signing failed")
+		return nil, errors.New("signing failed")
 	}
-	return hex.EncodeToString(sig[:siglen]), nil
+	return sig[:siglen], nil
 }
 
 func Verify(scheme int, sig []byte, message []byte, pk []byte) (bool, error) {

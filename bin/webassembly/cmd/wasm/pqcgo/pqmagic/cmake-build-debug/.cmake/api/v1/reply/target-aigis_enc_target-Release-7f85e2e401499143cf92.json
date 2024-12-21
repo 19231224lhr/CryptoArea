@@ -1,0 +1,93 @@
+{
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_custom_target"
+		],
+		"files" : 
+		[
+			"kem/aigis-enc/std/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 54,
+				"parent" : 0
+			}
+		]
+	},
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 1,
+			"id" : "sm3::@3da82b61d6c02a7d9b22"
+		},
+		{
+			"backtrace" : 1,
+			"id" : "randombytes::@c810615cce0f7acb82dc"
+		},
+		{
+			"backtrace" : 1,
+			"id" : "aigis_enc_static_1::@6d60d3bdd58f7f880024"
+		},
+		{
+			"backtrace" : 1,
+			"id" : "aigis_enc_static_2::@6d60d3bdd58f7f880024"
+		},
+		{
+			"backtrace" : 1,
+			"id" : "aigis_enc_static_3::@6d60d3bdd58f7f880024"
+		},
+		{
+			"backtrace" : 1,
+			"id" : "aigis_enc_static_4::@6d60d3bdd58f7f880024"
+		}
+	],
+	"id" : "aigis_enc_target::@6d60d3bdd58f7f880024",
+	"name" : "aigis_enc_target",
+	"paths" : 
+	{
+		"build" : "kem/aigis-enc/std",
+		"source" : "kem/aigis-enc/std"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		},
+		{
+			"name" : "CMake Rules",
+			"sourceIndexes" : 
+			[
+				1
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 1,
+			"isGenerated" : true,
+			"path" : "cmake-build-debug/kem/aigis-enc/std/CMakeFiles/aigis_enc_target",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "cmake-build-debug/kem/aigis-enc/std/CMakeFiles/aigis_enc_target.rule",
+			"sourceGroupIndex" : 1
+		}
+	],
+	"type" : "UTILITY"
+}

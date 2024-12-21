@@ -14,7 +14,7 @@ func TestKeyGen(t *testing.T) {
 		if len(pk) == 0 || len(sk) == 0 {
 			t.Fatalf("KeyGen returned empty keys for scheme %d", scheme)
 		}
-		t.Logf("scheme:%d, pk: %s\n,sk: %s", scheme, pk, sk)
+		t.Logf("scheme:%d, pk: %s\n,sk: %s", scheme, hex.EncodeToString(pk), hex.EncodeToString(sk))
 	}
 }
 
@@ -28,7 +28,7 @@ func TestKeyGenWithSeed(t *testing.T) {
 		if len(pk) == 0 || len(sk) == 0 {
 			t.Fatalf("KeyGenWithSeed returned empty keys for scheme %d", scheme)
 		}
-		t.Logf("scheme:%d, pk: %s\n,sk: %s", scheme, pk, sk)
+		t.Logf("scheme:%d, pk: %s\n,sk: %s", scheme, hex.EncodeToString(pk), hex.EncodeToString(sk))
 	}
 }
 
@@ -39,15 +39,14 @@ func TestSign(t *testing.T) {
 		if err != nil {
 			t.Fatalf("KeyGen failed for scheme %d: %v", scheme, err)
 		}
-		skBytes, _ := hex.DecodeString(sk)
-		sig, err := Sign(scheme, message, skBytes)
+		sig, err := Sign(scheme, message, sk)
 		if err != nil {
 			t.Fatalf("Sign failed for scheme %d: %v", scheme, err)
 		}
 		if len(sig) == 0 {
 			t.Fatalf("Sign returned empty signature for scheme %d", scheme)
 		}
-		t.Logf("scheme:%d, sk: %s\n,sig: %s", scheme, sk, sig)
+		t.Logf("scheme:%d, sk: %s\n,sig: %s", scheme, hex.EncodeToString(sk), hex.EncodeToString(sig))
 	}
 }
 
@@ -58,14 +57,11 @@ func TestVerify(t *testing.T) {
 		if err != nil {
 			t.Fatalf("KeyGen failed for scheme %d: %v", scheme, err)
 		}
-		skBytes, _ := hex.DecodeString(sk)
-		sig, err := Sign(scheme, message, skBytes)
+		sig, err := Sign(scheme, message, sk)
 		if err != nil {
 			t.Fatalf("Sign failed for scheme %d: %v", scheme, err)
 		}
-		sigBytes, _ := hex.DecodeString(sig)
-		pkBytes, _ := hex.DecodeString(pk)
-		valid, err := Verify(scheme, sigBytes, message, pkBytes)
+		valid, err := Verify(scheme, sig, message, pk)
 		if err != nil {
 			t.Fatalf("Verify failed for scheme %d: %v", scheme, err)
 		}
@@ -81,14 +77,11 @@ func TestVerifyKeyGen(t *testing.T) {
 		if err != nil {
 			t.Fatalf("KeyGen failed for scheme %d: %v", scheme, err)
 		}
-		fskBytes, _ := hex.DecodeString(fsk)
-		bpk, bsk, err := KeyGenWithSeed(scheme, fskBytes)
+		bpk, bsk, err := KeyGenWithSeed(scheme, fsk)
 		if err != nil {
-			t.Fatalf("KeyGen failed for scheme %d: %v", scheme, err)
+			t.Fatalf("KeyGenWithSeed failed for scheme %d: %v", scheme, err)
 		}
-		bskBytes, _ := hex.DecodeString(bsk)
-		bpkBytes, _ := hex.DecodeString(bpk)
-		valid, err := VerifyKeyGen(scheme, fskBytes, bskBytes, bpkBytes)
+		valid, err := VerifyKeyGen(scheme, fsk, bsk, bpk)
 		if err != nil {
 			t.Fatalf("VerifyKeyGen failed for scheme %d: %v", scheme, err)
 		}

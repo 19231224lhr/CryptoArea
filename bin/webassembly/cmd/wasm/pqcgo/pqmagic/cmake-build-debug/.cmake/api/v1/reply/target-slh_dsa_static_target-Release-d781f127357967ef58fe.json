@@ -1,0 +1,153 @@
+{
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_custom_target"
+		],
+		"files" : 
+		[
+			"sig/slh_dsa/std/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 180,
+				"parent" : 0
+			}
+		]
+	},
+	"dependencies" : 
+	[
+		{
+			"id" : "slh_dsa_static_sm3_128f_robust::@b20d828c4de1680a66b9"
+		},
+		{
+			"id" : "slh_dsa_static_sm3_128f_simple::@b20d828c4de1680a66b9"
+		},
+		{
+			"id" : "slh_dsa_static_sm3_128s_robust::@b20d828c4de1680a66b9"
+		},
+		{
+			"id" : "slh_dsa_static_sm3_128s_simple::@b20d828c4de1680a66b9"
+		},
+		{
+			"id" : "slh_dsa_static_sha2_128f_robust::@b20d828c4de1680a66b9"
+		},
+		{
+			"id" : "slh_dsa_static_sha2_128f_simple::@b20d828c4de1680a66b9"
+		},
+		{
+			"id" : "slh_dsa_static_sha2_128s_robust::@b20d828c4de1680a66b9"
+		},
+		{
+			"id" : "slh_dsa_static_sha2_128s_simple::@b20d828c4de1680a66b9"
+		},
+		{
+			"id" : "slh_dsa_static_sha2_192f_robust::@b20d828c4de1680a66b9"
+		},
+		{
+			"id" : "slh_dsa_static_sha2_192f_simple::@b20d828c4de1680a66b9"
+		},
+		{
+			"id" : "slh_dsa_static_sha2_192s_robust::@b20d828c4de1680a66b9"
+		},
+		{
+			"id" : "slh_dsa_static_sha2_192s_simple::@b20d828c4de1680a66b9"
+		},
+		{
+			"id" : "slh_dsa_static_sha2_256f_robust::@b20d828c4de1680a66b9"
+		},
+		{
+			"id" : "slh_dsa_static_sha2_256f_simple::@b20d828c4de1680a66b9"
+		},
+		{
+			"id" : "slh_dsa_static_sha2_256s_robust::@b20d828c4de1680a66b9"
+		},
+		{
+			"id" : "slh_dsa_static_sha2_256s_simple::@b20d828c4de1680a66b9"
+		},
+		{
+			"id" : "slh_dsa_static_shake_128f_robust::@b20d828c4de1680a66b9"
+		},
+		{
+			"id" : "slh_dsa_static_shake_128f_simple::@b20d828c4de1680a66b9"
+		},
+		{
+			"id" : "slh_dsa_static_shake_128s_robust::@b20d828c4de1680a66b9"
+		},
+		{
+			"id" : "slh_dsa_static_shake_128s_simple::@b20d828c4de1680a66b9"
+		},
+		{
+			"id" : "slh_dsa_static_shake_192f_robust::@b20d828c4de1680a66b9"
+		},
+		{
+			"id" : "slh_dsa_static_shake_192f_simple::@b20d828c4de1680a66b9"
+		},
+		{
+			"id" : "slh_dsa_static_shake_192s_robust::@b20d828c4de1680a66b9"
+		},
+		{
+			"id" : "slh_dsa_static_shake_192s_simple::@b20d828c4de1680a66b9"
+		},
+		{
+			"id" : "slh_dsa_static_shake_256f_robust::@b20d828c4de1680a66b9"
+		},
+		{
+			"id" : "slh_dsa_static_shake_256f_simple::@b20d828c4de1680a66b9"
+		},
+		{
+			"id" : "slh_dsa_static_shake_256s_robust::@b20d828c4de1680a66b9"
+		},
+		{
+			"id" : "slh_dsa_static_shake_256s_simple::@b20d828c4de1680a66b9"
+		}
+	],
+	"id" : "slh_dsa_static_target::@b20d828c4de1680a66b9",
+	"name" : "slh_dsa_static_target",
+	"paths" : 
+	{
+		"build" : "sig/slh_dsa/std",
+		"source" : "sig/slh_dsa/std"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		},
+		{
+			"name" : "CMake Rules",
+			"sourceIndexes" : 
+			[
+				1
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 1,
+			"isGenerated" : true,
+			"path" : "cmake-build-debug/sig/slh_dsa/std/CMakeFiles/slh_dsa_static_target",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "cmake-build-debug/sig/slh_dsa/std/CMakeFiles/slh_dsa_static_target.rule",
+			"sourceGroupIndex" : 1
+		}
+	],
+	"type" : "UTILITY"
+}
