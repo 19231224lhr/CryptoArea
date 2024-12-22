@@ -620,7 +620,7 @@ function createExportWrapper(name, nargs) {
 // include: runtime_exceptions.js
 // end include: runtime_exceptions.js
 function findWasmBinary() {
-    var f = 'cmTC_beabe.wasm';
+    var f = 'cmTC_61a7a.wasm';
     if (!isDataURI(f)) {
       return locateFile(f);
     }

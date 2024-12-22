@@ -1,0 +1,27 @@
+[
+{
+  "directory": "/home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc/pqmagic",
+  "command": "/home/teddycode/Desktop/tools/emsdk/upstream/emscripten/emcc -DAIGIS_SIG_MODE=2 -DDILITHIUM_MODE=3 -DML_DSA_MODE=65 -DSLH_DSA_MODE=slh-dsa-shake-192f -I/home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc/libs/include  -o CMakeFiles/pqcsign_wrapper.dir/pqcsign_wrapper.c.o -c /home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc/pqcsign_wrapper.c",
+  "file": "/home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc/pqcsign_wrapper.c"
+},
+{
+  "directory": "/home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc/pqmagic",
+  "command": "/home/teddycode/Desktop/tools/emsdk/upstream/emscripten/emcc -DAIGIS_SIG_MODE=2 -DDILITHIUM_MODE=3 -DML_DSA_MODE=65 -DSLH_DSA_MODE=slh-dsa-shake-192f -I/home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc/libs/include  -o CMakeFiles/pqcsign_wrapper.dir/fips202.c.o -c /home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc/fips202.c",
+  "file": "/home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc/fips202.c"
+},
+{
+  "directory": "/home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc/pqmagic",
+  "command": "/home/teddycode/Desktop/tools/emsdk/upstream/emscripten/emcc -DAIGIS_SIG_MODE=2 -DDILITHIUM_MODE=3 -DML_DSA_MODE=65 -DSLH_DSA_MODE=slh-dsa-shake-192f -I/home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc/libs/include  -o CMakeFiles/test_wrapper.dir/test_wrapper.c.o -c /home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc/test_wrapper.c",
+  "file": "/home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc/test_wrapper.c"
+},
+{
+  "directory": "/home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc/pqmagic",
+  "command": "/home/teddycode/Desktop/tools/emsdk/upstream/emscripten/emcc -DAIGIS_SIG_MODE=2 -DDILITHIUM_MODE=3 -DML_DSA_MODE=65 -DSLH_DSA_MODE=slh-dsa-shake-192f -I/home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc/libs/include  -o CMakeFiles/test_wrapper.dir/pqcsign_wrapper.c.o -c /home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc/pqcsign_wrapper.c",
+  "file": "/home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc/pqcsign_wrapper.c"
+},
+{
+  "directory": "/home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc/pqmagic",
+  "command": "/home/teddycode/Desktop/tools/emsdk/upstream/emscripten/emcc -DAIGIS_SIG_MODE=2 -DDILITHIUM_MODE=3 -DML_DSA_MODE=65 -DSLH_DSA_MODE=slh-dsa-shake-192f -I/home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc/libs/include  -o CMakeFiles/test_wrapper.dir/fips202.c.o -c /home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc/fips202.c",
+  "file": "/home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc/fips202.c"
+}
+]

@@ -1,5 +1,5 @@
 CMakeFiles/test_wrapper.dir/test_wrapper.c.o: \
-  /home/teddycode/Desktop/Workspace/crypto-suites/bin/webassembly/cmd/wasm/clang/test_wrapper.c \
+  /home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc/test_wrapper.c \
   /home/teddycode/Desktop/tools/emsdk/upstream/emscripten/cache/sysroot/include/stdio.h \
   /home/teddycode/Desktop/tools/emsdk/upstream/emscripten/cache/sysroot/include/wasi/api.h \
   /home/teddycode/Desktop/tools/emsdk/upstream/lib/clang/20/include/stddef.h \
@@ -22,7 +22,6 @@ CMakeFiles/test_wrapper.dir/test_wrapper.c.o: \
   /home/teddycode/Desktop/tools/emsdk/upstream/emscripten/cache/sysroot/include/compat/string.h \
   /home/teddycode/Desktop/tools/emsdk/upstream/emscripten/cache/sysroot/include/string.h \
   /home/teddycode/Desktop/tools/emsdk/upstream/emscripten/cache/sysroot/include/strings.h \
-  /home/teddycode/Desktop/Workspace/crypto-suites/bin/webassembly/cmd/wasm/clang/pqcsign_wrapper.h \
-  /home/teddycode/Desktop/Workspace/crypto-suites/bin/webassembly/cmd/wasm/clang/./libs/include/pqmagic_api.h \
-  /home/teddycode/Desktop/Workspace/crypto-suites/bin/webassembly/cmd/wasm/clang/libs/include/pqmagic_api.h \
-  /home/teddycode/Desktop/Workspace/crypto-suites/bin/webassembly/cmd/wasm/clang/pqmagic/utils/randombytes.h
+  /home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc/pqcsign_wrapper.h \
+  /home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc/./libs/include/pqmagic_api.h \
+  /home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc/pqmagic/utils/randombytes.h

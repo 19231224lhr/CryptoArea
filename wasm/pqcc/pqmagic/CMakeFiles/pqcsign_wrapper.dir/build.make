@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/teddycode/Desktop/Workspace/crypto-suites/bin/webassembly/cmd/wasm/clang
+CMAKE_SOURCE_DIR = /home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/teddycode/Desktop/Workspace/crypto-suites/bin/webassembly/cmd/wasm/clang/pqmagic
+CMAKE_BINARY_DIR = /home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc/pqmagic
 
 # Include any dependencies generated for this target.
 include CMakeFiles/pqcsign_wrapper.dir/depend.make
@@ -72,30 +72,30 @@ include CMakeFiles/pqcsign_wrapper.dir/flags.make
 CMakeFiles/pqcsign_wrapper.dir/pqcsign_wrapper.c.o: CMakeFiles/pqcsign_wrapper.dir/flags.make
 CMakeFiles/pqcsign_wrapper.dir/pqcsign_wrapper.c.o: ../pqcsign_wrapper.c
 CMakeFiles/pqcsign_wrapper.dir/pqcsign_wrapper.c.o: CMakeFiles/pqcsign_wrapper.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/teddycode/Desktop/Workspace/crypto-suites/bin/webassembly/cmd/wasm/clang/pqmagic/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/pqcsign_wrapper.dir/pqcsign_wrapper.c.o"
-	/home/teddycode/Desktop/tools/emsdk/upstream/emscripten/emcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pqcsign_wrapper.dir/pqcsign_wrapper.c.o -MF CMakeFiles/pqcsign_wrapper.dir/pqcsign_wrapper.c.o.d -o CMakeFiles/pqcsign_wrapper.dir/pqcsign_wrapper.c.o -c /home/teddycode/Desktop/Workspace/crypto-suites/bin/webassembly/cmd/wasm/clang/pqcsign_wrapper.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc/pqmagic/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/pqcsign_wrapper.dir/pqcsign_wrapper.c.o"
+	/home/teddycode/Desktop/tools/emsdk/upstream/emscripten/emcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pqcsign_wrapper.dir/pqcsign_wrapper.c.o -MF CMakeFiles/pqcsign_wrapper.dir/pqcsign_wrapper.c.o.d -o CMakeFiles/pqcsign_wrapper.dir/pqcsign_wrapper.c.o -c /home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc/pqcsign_wrapper.c
 
 CMakeFiles/pqcsign_wrapper.dir/pqcsign_wrapper.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/pqcsign_wrapper.dir/pqcsign_wrapper.c.i"
-	/home/teddycode/Desktop/tools/emsdk/upstream/emscripten/emcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/teddycode/Desktop/Workspace/crypto-suites/bin/webassembly/cmd/wasm/clang/pqcsign_wrapper.c > CMakeFiles/pqcsign_wrapper.dir/pqcsign_wrapper.c.i
+	/home/teddycode/Desktop/tools/emsdk/upstream/emscripten/emcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc/pqcsign_wrapper.c > CMakeFiles/pqcsign_wrapper.dir/pqcsign_wrapper.c.i
 
 CMakeFiles/pqcsign_wrapper.dir/pqcsign_wrapper.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/pqcsign_wrapper.dir/pqcsign_wrapper.c.s"
-	/home/teddycode/Desktop/tools/emsdk/upstream/emscripten/emcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/teddycode/Desktop/Workspace/crypto-suites/bin/webassembly/cmd/wasm/clang/pqcsign_wrapper.c -o CMakeFiles/pqcsign_wrapper.dir/pqcsign_wrapper.c.s
+	/home/teddycode/Desktop/tools/emsdk/upstream/emscripten/emcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc/pqcsign_wrapper.c -o CMakeFiles/pqcsign_wrapper.dir/pqcsign_wrapper.c.s
 
 CMakeFiles/pqcsign_wrapper.dir/fips202.c.o: CMakeFiles/pqcsign_wrapper.dir/flags.make
 CMakeFiles/pqcsign_wrapper.dir/fips202.c.o: ../fips202.c
 CMakeFiles/pqcsign_wrapper.dir/fips202.c.o: CMakeFiles/pqcsign_wrapper.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/teddycode/Desktop/Workspace/crypto-suites/bin/webassembly/cmd/wasm/clang/pqmagic/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/pqcsign_wrapper.dir/fips202.c.o"
-	/home/teddycode/Desktop/tools/emsdk/upstream/emscripten/emcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pqcsign_wrapper.dir/fips202.c.o -MF CMakeFiles/pqcsign_wrapper.dir/fips202.c.o.d -o CMakeFiles/pqcsign_wrapper.dir/fips202.c.o -c /home/teddycode/Desktop/Workspace/crypto-suites/bin/webassembly/cmd/wasm/clang/fips202.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc/pqmagic/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/pqcsign_wrapper.dir/fips202.c.o"
+	/home/teddycode/Desktop/tools/emsdk/upstream/emscripten/emcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pqcsign_wrapper.dir/fips202.c.o -MF CMakeFiles/pqcsign_wrapper.dir/fips202.c.o.d -o CMakeFiles/pqcsign_wrapper.dir/fips202.c.o -c /home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc/fips202.c
 
 CMakeFiles/pqcsign_wrapper.dir/fips202.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/pqcsign_wrapper.dir/fips202.c.i"
-	/home/teddycode/Desktop/tools/emsdk/upstream/emscripten/emcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/teddycode/Desktop/Workspace/crypto-suites/bin/webassembly/cmd/wasm/clang/fips202.c > CMakeFiles/pqcsign_wrapper.dir/fips202.c.i
+	/home/teddycode/Desktop/tools/emsdk/upstream/emscripten/emcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc/fips202.c > CMakeFiles/pqcsign_wrapper.dir/fips202.c.i
 
 CMakeFiles/pqcsign_wrapper.dir/fips202.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/pqcsign_wrapper.dir/fips202.c.s"
-	/home/teddycode/Desktop/tools/emsdk/upstream/emscripten/emcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/teddycode/Desktop/Workspace/crypto-suites/bin/webassembly/cmd/wasm/clang/fips202.c -o CMakeFiles/pqcsign_wrapper.dir/fips202.c.s
+	/home/teddycode/Desktop/tools/emsdk/upstream/emscripten/emcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc/fips202.c -o CMakeFiles/pqcsign_wrapper.dir/fips202.c.s
 
 # Object files for target pqcsign_wrapper
 pqcsign_wrapper_OBJECTS = \
@@ -108,22 +108,8 @@ pqcsign_wrapper_EXTERNAL_OBJECTS =
 pqcsign_wrapper.js: CMakeFiles/pqcsign_wrapper.dir/pqcsign_wrapper.c.o
 pqcsign_wrapper.js: CMakeFiles/pqcsign_wrapper.dir/fips202.c.o
 pqcsign_wrapper.js: CMakeFiles/pqcsign_wrapper.dir/build.make
-pqcsign_wrapper.js: ../libs/lib/libpqmagic.a
-pqcsign_wrapper.js: ../libs/lib/libpqmagic.so
-pqcsign_wrapper.js: ../libs/lib/libpqmagic_aigis_sig_std.a
-pqcsign_wrapper.js: ../libs/lib/libpqmagic_aigis_sig_std.so
-pqcsign_wrapper.js: ../libs/lib/libpqmagic_dilithium_std.a
-pqcsign_wrapper.js: ../libs/lib/libpqmagic_dilithium_std.so
-pqcsign_wrapper.js: ../libs/lib/libpqmagic_ml_dsa_std.a
-pqcsign_wrapper.js: ../libs/lib/libpqmagic_ml_dsa_std.so
-pqcsign_wrapper.js: ../libs/lib/libpqmagic_slh_dsa_std.a
-pqcsign_wrapper.js: ../libs/lib/libpqmagic_slh_dsa_std.so
-pqcsign_wrapper.js: ../libs/lib/libpqmagic_sphincs_a_std.a
-pqcsign_wrapper.js: ../libs/lib/libpqmagic_sphincs_a_std.so
-pqcsign_wrapper.js: ../libs/lib/libpqmagic_std.a
-pqcsign_wrapper.js: ../libs/lib/libpqmagic_std.so
 pqcsign_wrapper.js: CMakeFiles/pqcsign_wrapper.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/teddycode/Desktop/Workspace/crypto-suites/bin/webassembly/cmd/wasm/clang/pqmagic/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking C executable pqcsign_wrapper.js"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc/pqmagic/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking C executable pqcsign_wrapper.js"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/pqcsign_wrapper.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -135,6 +121,6 @@ CMakeFiles/pqcsign_wrapper.dir/clean:
 .PHONY : CMakeFiles/pqcsign_wrapper.dir/clean
 
 CMakeFiles/pqcsign_wrapper.dir/depend:
-	cd /home/teddycode/Desktop/Workspace/crypto-suites/bin/webassembly/cmd/wasm/clang/pqmagic && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/teddycode/Desktop/Workspace/crypto-suites/bin/webassembly/cmd/wasm/clang /home/teddycode/Desktop/Workspace/crypto-suites/bin/webassembly/cmd/wasm/clang /home/teddycode/Desktop/Workspace/crypto-suites/bin/webassembly/cmd/wasm/clang/pqmagic /home/teddycode/Desktop/Workspace/crypto-suites/bin/webassembly/cmd/wasm/clang/pqmagic /home/teddycode/Desktop/Workspace/crypto-suites/bin/webassembly/cmd/wasm/clang/pqmagic/CMakeFiles/pqcsign_wrapper.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc/pqmagic && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc /home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc /home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc/pqmagic /home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc/pqmagic /home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc/pqmagic/CMakeFiles/pqcsign_wrapper.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/pqcsign_wrapper.dir/depend
 

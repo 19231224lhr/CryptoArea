@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/teddycode/Desktop/Workspace/crypto-suites/bin/webassembly/cmd/wasm/clang
+CMAKE_SOURCE_DIR = /home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/teddycode/Desktop/Workspace/crypto-suites/bin/webassembly/cmd/wasm/clang/pqmagic
+CMAKE_BINARY_DIR = /home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc/pqmagic
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/teddycode/Desktop/Workspace/crypto-suites/bin/webassembly/cmd/wasm/clang/pqmagic/CMakeFiles /home/teddycode/Desktop/Workspace/crypto-suites/bin/webassembly/cmd/wasm/clang/pqmagic//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc/pqmagic/CMakeFiles /home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc/pqmagic//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/teddycode/Desktop/Workspace/crypto-suites/bin/webassembly/cmd/wasm/clang/pqmagic/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc/pqmagic/CMakeFiles 0
 .PHONY : all
 
 # The main clean target

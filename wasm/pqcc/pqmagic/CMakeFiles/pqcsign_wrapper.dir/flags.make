@@ -4,7 +4,7 @@
 # compile C with /home/teddycode/Desktop/tools/emsdk/upstream/emscripten/emcc
 C_DEFINES = -DAIGIS_SIG_MODE=2 -DDILITHIUM_MODE=3 -DML_DSA_MODE=65 -DSLH_DSA_MODE=slh-dsa-shake-192f
 
-C_INCLUDES = -I/home/teddycode/Desktop/Workspace/crypto-suites/bin/webassembly/cmd/wasm/clang/libs/include
+C_INCLUDES = -I/home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc/libs/include
 
 C_FLAGS = 
 

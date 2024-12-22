@@ -8,8 +8,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/teddycode/Desktop/Workspace/crypto-suites/bin/webassembly/cmd/wasm/clang/fips202.c" "CMakeFiles/pqcsign_wrapper.dir/fips202.c.o" "gcc" "CMakeFiles/pqcsign_wrapper.dir/fips202.c.o.d"
-  "/home/teddycode/Desktop/Workspace/crypto-suites/bin/webassembly/cmd/wasm/clang/pqcsign_wrapper.c" "CMakeFiles/pqcsign_wrapper.dir/pqcsign_wrapper.c.o" "gcc" "CMakeFiles/pqcsign_wrapper.dir/pqcsign_wrapper.c.o.d"
+  "/home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc/fips202.c" "CMakeFiles/pqcsign_wrapper.dir/fips202.c.o" "gcc" "CMakeFiles/pqcsign_wrapper.dir/fips202.c.o.d"
+  "/home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc/pqcsign_wrapper.c" "CMakeFiles/pqcsign_wrapper.dir/pqcsign_wrapper.c.o" "gcc" "CMakeFiles/pqcsign_wrapper.dir/pqcsign_wrapper.c.o.d"
   )
 
 # Targets to which this target links.

@@ -20,4 +20,7 @@ IS_ENC=OFF -DENABLE_TEST=OFF -DENABLE_BENCH=OFF -DCMAKE_TOOLCHAIN_FILE=../toolch
  make &&  make install
 ```
 完了会自动将编译好的库文件拷贝到`libs/`目录下.
-```
+
+## 测试结果
+![png](gotest.png)
+![png](gobench.png)

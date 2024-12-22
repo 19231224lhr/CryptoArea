@@ -1,5 +1,5 @@
 CMakeFiles/test_wrapper.dir/fips202.c.o: \
-  /home/teddycode/Desktop/Workspace/crypto-suites/bin/webassembly/cmd/wasm/clang/fips202.c \
+  /home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc/fips202.c \
   /home/teddycode/Desktop/tools/emsdk/upstream/emscripten/cache/sysroot/include/compat/stdlib.h \
   /home/teddycode/Desktop/tools/emsdk/upstream/emscripten/cache/sysroot/include/stdlib.h \
   /home/teddycode/Desktop/tools/emsdk/upstream/emscripten/cache/sysroot/include/features.h \
@@ -9,7 +9,7 @@ CMakeFiles/test_wrapper.dir/fips202.c.o: \
   /home/teddycode/Desktop/tools/emsdk/upstream/emscripten/cache/sysroot/include/stdint.h \
   /home/teddycode/Desktop/tools/emsdk/upstream/emscripten/cache/sysroot/include/bits/stdint.h \
   /home/teddycode/Desktop/tools/emsdk/upstream/emscripten/cache/sysroot/include/assert.h \
-  /home/teddycode/Desktop/Workspace/crypto-suites/bin/webassembly/cmd/wasm/clang/fips202.h \
+  /home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc/fips202.h \
   /home/teddycode/Desktop/tools/emsdk/upstream/emscripten/cache/sysroot/include/stdio.h \
   /home/teddycode/Desktop/tools/emsdk/upstream/emscripten/cache/sysroot/include/wasi/api.h \
   /home/teddycode/Desktop/tools/emsdk/upstream/lib/clang/20/include/stddef.h \
@@ -21,7 +21,7 @@ CMakeFiles/test_wrapper.dir/fips202.c.o: \
   /home/teddycode/Desktop/tools/emsdk/upstream/lib/clang/20/include/__stddef_null.h \
   /home/teddycode/Desktop/tools/emsdk/upstream/lib/clang/20/include/__stddef_max_align_t.h \
   /home/teddycode/Desktop/tools/emsdk/upstream/lib/clang/20/include/__stddef_offsetof.h \
-  /home/teddycode/Desktop/Workspace/crypto-suites/bin/webassembly/cmd/wasm/clang/pqmagic/include/pqmagic_config.h \
+  /home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc/pqmagic/include/pqmagic_config.h \
   /home/teddycode/Desktop/tools/emsdk/upstream/emscripten/cache/sysroot/include/compat/string.h \
   /home/teddycode/Desktop/tools/emsdk/upstream/emscripten/cache/sysroot/include/string.h \
   /home/teddycode/Desktop/tools/emsdk/upstream/emscripten/cache/sysroot/include/strings.h

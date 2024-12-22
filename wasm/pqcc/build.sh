@@ -1,4 +1,7 @@
 #!/bin/bash
+echo "Cleaning up..."
+rm -rf ./build
+mkdir ./build
 
 echo "Compiling pqcsign_wrapper..."
 emcc pqcsign_wrapper.c fips202.c  --emit-tsd=pqcsign.d.ts \
@@ -49,9 +52,8 @@ emcc test_wrapper.c pqcsign_wrapper.c fips202.c   --emit-tsd=testcase.d.ts \
 
 if [ $? -eq 0 ]; then
     echo "Compiling testcase success!"
+    echo "Install binaries into assets directory..."
+    cp ./build/*  ../tests/assets/
 else
     echo "Compiling testcase failed!"
 fi
-
-echo "Install binaries into assets directory..."
-cp ./build/*  ../tests/assets/

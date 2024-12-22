@@ -1,7 +1,6 @@
 package pqcgo
 
 import (
-	"encoding/hex"
 	"testing"
 )
 
@@ -14,7 +13,7 @@ func TestKeyGen(t *testing.T) {
 		if len(pk) == 0 || len(sk) == 0 {
 			t.Fatalf("KeyGen returned empty keys for scheme %d", scheme)
 		}
-		t.Logf("scheme:%d, pk: %s\n,sk: %s", scheme, hex.EncodeToString(pk), hex.EncodeToString(sk))
+		//t.Logf("scheme:%d, pk: %s\n,sk: %s", scheme, hex.EncodeToString(pk), hex.EncodeToString(sk))
 	}
 }
 
@@ -28,7 +27,7 @@ func TestKeyGenWithSeed(t *testing.T) {
 		if len(pk) == 0 || len(sk) == 0 {
 			t.Fatalf("KeyGenWithSeed returned empty keys for scheme %d", scheme)
 		}
-		t.Logf("scheme:%d, pk: %s\n,sk: %s", scheme, hex.EncodeToString(pk), hex.EncodeToString(sk))
+		//t.Logf("scheme:%d, pk: %s\n,sk: %s", scheme, hex.EncodeToString(pk), hex.EncodeToString(sk))
 	}
 }
 
@@ -46,7 +45,7 @@ func TestSign(t *testing.T) {
 		if len(sig) == 0 {
 			t.Fatalf("Sign returned empty signature for scheme %d", scheme)
 		}
-		t.Logf("scheme:%d, sk: %s\n,sig: %s", scheme, hex.EncodeToString(sk), hex.EncodeToString(sig))
+		//t.Logf("scheme:%d, sk: %s\n,sig: %s", scheme, hex.EncodeToString(sk), hex.EncodeToString(sig))
 	}
 }
 

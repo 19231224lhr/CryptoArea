@@ -1,5 +1,5 @@
 CMakeFiles/test_wrapper.dir/pqcsign_wrapper.c.o: \
-  /home/teddycode/Desktop/Workspace/crypto-suites/bin/webassembly/cmd/wasm/clang/pqcsign_wrapper.c \
+  /home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc/pqcsign_wrapper.c \
   /home/teddycode/Desktop/tools/emsdk/upstream/emscripten/cache/sysroot/include/stdio.h \
   /home/teddycode/Desktop/tools/emsdk/upstream/emscripten/cache/sysroot/include/wasi/api.h \
   /home/teddycode/Desktop/tools/emsdk/upstream/lib/clang/20/include/stddef.h \
@@ -19,11 +19,11 @@ CMakeFiles/test_wrapper.dir/pqcsign_wrapper.c.o: \
   /home/teddycode/Desktop/tools/emsdk/upstream/emscripten/cache/sysroot/include/compat/stdlib.h \
   /home/teddycode/Desktop/tools/emsdk/upstream/emscripten/cache/sysroot/include/stdlib.h \
   /home/teddycode/Desktop/tools/emsdk/upstream/emscripten/cache/sysroot/include/alloca.h \
-  /home/teddycode/Desktop/Workspace/crypto-suites/bin/webassembly/cmd/wasm/clang/pqcsign_wrapper.h \
-  /home/teddycode/Desktop/Workspace/crypto-suites/bin/webassembly/cmd/wasm/clang/./libs/include/pqmagic_api.h \
+  /home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc/pqcsign_wrapper.h \
+  /home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc/./libs/include/pqmagic_api.h \
   /home/teddycode/Desktop/tools/emsdk/upstream/emscripten/cache/sysroot/include/compat/string.h \
   /home/teddycode/Desktop/tools/emsdk/upstream/emscripten/cache/sysroot/include/string.h \
   /home/teddycode/Desktop/tools/emsdk/upstream/emscripten/cache/sysroot/include/strings.h \
-  /home/teddycode/Desktop/Workspace/crypto-suites/bin/webassembly/cmd/wasm/clang/./pqmagic/utils/randombytes.h \
-  /home/teddycode/Desktop/Workspace/crypto-suites/bin/webassembly/cmd/wasm/clang/fips202.h \
-  /home/teddycode/Desktop/Workspace/crypto-suites/bin/webassembly/cmd/wasm/clang/pqmagic/include/pqmagic_config.h
+  /home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc/./pqmagic/utils/randombytes.h \
+  /home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc/fips202.h \
+  /home/teddycode/Desktop/Workspace/crypto-suites/wasm/pqcc/pqmagic/include/pqmagic_config.h

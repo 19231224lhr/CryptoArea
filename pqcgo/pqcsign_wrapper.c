@@ -21,7 +21,9 @@ size_t secret_key_bytes[4] = {
 };
 
 void print_hex(const char *label, const uint8_t *data, size_t len) {
+    #ifdef DEBUG
     printf("%s: ", label);
+    #endif
     for (size_t i = 0; i < len; i++) {
         printf("%02x", data[i]);
     }
