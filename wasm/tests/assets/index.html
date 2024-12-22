@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>hello wasm</title>
+    <script src="wasm_exec.js"></script>
+    <script>
+        const go = new Go();
+        WebAssembly.instantiateStreaming(
+            fetch("crypto.wasm"),
+            go.importObject
+        ).then((result) => {
+            go.run(result.instance);
+            TestPrettyJSON('{"user_id": "571401777717031","user_name": "代码与野兽","description": "关注real-time web、低代码、数据可视化、web3等领域。"}')
+        });
+    </script>
+        <script async type="text/javascript" src="pqcsign_wrapper.js"></script>
+        <script>
+            // 加载 WebAssembly 模块
+            var Module = {
+                onRuntimeInitialized: function() {
+                    // 使用 cwrap 获取导出的函数
+                    var add = Module.cwrap('test_add', 'number', ['number', 'number']);
+                    console.log('Result of add(2, 3):', add(2, 3));
+
+                    // 获取 C 函数的引用
+                    const modifyArray = Module.cwrap('test_modify_array', null, ['number', 'number']);
+                    // 创建一个 JavaScript 数组
+                    const jsArray = [1, 2, 3, 4, 5];
+                    const length = jsArray.length;
+                    // 将 JavaScript 数组转换为 WebAssembly 可用的内存
+                    const buffer = Module._malloc(jsArray.length * 4); // 每个元素 4 字节（int32）
+                    Module.HEAP32.set(jsArray, buffer / 4); // 将数组复制到 WebAssembly 内存中
+                    // 调用 C 函数
+                    modifyArray(buffer, length);
+                    // 从 WebAssembly 内存中读取修改后的数组
+                    const resultArray = Module.HEAP32.subarray(buffer / 4, buffer / 4 + length);
+                    // 打印结果
+                    console.log('Modified array:', Array.from(resultArray));
+                    // 释放内存
+                    Module._free(buffer);
+                }
+            };
+        </script>
+<!--    <script async type="text/javascript" src="pqc_sign.js"></script>-->
+<!--    <script>-->
+<!--        // 加载 WebAssembly 模块-->
+<!--        var Module = {-->
+<!--            onRuntimeInitialized: function() {-->
+<!--                // 使用 cwrap 获取导出的函数-->
+<!--                var add = Module.cwrap('test_add', 'number', ['number', 'number']);-->
+<!--                console.log('Result of add(2, 3):', add(2, 3));-->
+
+<!--                // 获取 C 函数的引用-->
+<!--                const modifyArray = Module.cwrap('test_modify_array', null, ['number', 'number']);-->
+<!--                // 创建一个 JavaScript 数组-->
+<!--                const jsArray = [1, 2, 3, 4, 5];-->
+<!--                const length = jsArray.length;-->
+<!--                // 将 JavaScript 数组转换为 WebAssembly 可用的内存-->
+<!--                const buffer = Module._malloc(jsArray.length * 4); // 每个元素 4 字节（int32）-->
+<!--                Module.HEAP32.set(jsArray, buffer / 4); // 将数组复制到 WebAssembly 内存中-->
+<!--                // 调用 C 函数-->
+<!--                modifyArray(buffer, length);-->
+<!--                // 从 WebAssembly 内存中读取修改后的数组-->
+<!--                const resultArray = Module.HEAP32.subarray(buffer / 4, buffer / 4 + length);-->
+<!--                // 打印结果-->
+<!--                console.log('Modified array:', Array.from(resultArray));-->
+<!--                // 释放内存-->
+<!--                Module._free(buffer);-->
+<!--            }-->
+<!--        };-->
+<!--    </script>-->
+<!--    <script async type="text/javascript" src="test_wrapper.js"></script>-->
+<!--    <script>-->
+<!--        // 创建模块实例-->
+<!--        var Module = {-->
+<!--            onRuntimeInitialized: function() {-->
+<!--                // 定义要传递的数组-->
+<!--                const jsArray = [1, 2, 3, 4, 5];-->
+<!--                const length = jsArray.length;-->
+
+<!--                // 分配内存并将 JS 数组复制到 WASM 内存-->
+<!--                const ptr = Module._malloc(jsArray.length * jsArray.BYTES_PER_ELEMENT);-->
+<!--                Module.HEAP32.set(jsArray, ptr / 4);-->
+
+<!--                // 调用 C 函数-->
+<!--                Module.ccall(-->
+<!--                    'process_array',      // C 函数名-->
+<!--                    'void',               // 返回类型-->
+<!--                    ['number', 'number'], // 参数类型-->
+<!--                    [ptr, length]         // 参数值-->
+<!--                );-->
+
+<!--                // 从 WASM 内存中读取修改后的数组-->
+<!--                const result = new Int32Array(Module.HEAP32.buffer, ptr, length);-->
+<!--                console.log('修改后的数组:', Array.from(result));-->
+
+<!--                // 释放内存-->
+<!--                Module._free(ptr);-->
+<!--            }-->
+<!--        }-->
+    </script>
+<!--    <script async type="text/javascript" src="pqcsign_wrapper.js"></script>-->
+</head>
+<body></body>
+</html>
