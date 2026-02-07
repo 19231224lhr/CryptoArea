@@ -1,14 +1,16 @@
 module blockchain-crypto
 
-go 1.22.7
+go 1.22.9
 
-toolchain go1.22.9
+toolchain go1.24.4
 
 replace github.com/cosmos/cosmos-sdk/x/auth => cosmossdk.io/x/auth v0.0.0
 
 replace github.com/cosmos/cosmos-sdk/x/bank => cosmossdk.io/x/bank v0.0.0
 
 replace github.com/cosmos/cosmos-sdk/x/staking => cosmossdk.io/x/staking v0.0.0
+
+replace teddycode/pqcgo => ../pqcgo
 
 require (
 	cosmossdk.io/collections v0.4.0
@@ -28,6 +30,7 @@ require (
 	google.golang.org/protobuf v1.34.2
 	pgregory.net/rapid v1.1.0
 	sigs.k8s.io/yaml v1.4.0
+	teddycode/pqcgo v0.0.0
 )
 
 require (
