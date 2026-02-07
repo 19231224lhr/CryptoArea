@@ -50,6 +50,27 @@ import "blockchain-crypto/walletcrypto"
 - `pq_ml_dsa`
 - `pq_slh_dsa`
 
+### 后量子签名算法解释（简版）
+
+- `pq_ml_dsa`
+  - 对应 NIST 标准化后的 ML-DSA（FIPS 204）路线
+  - 工程上通常作为默认优先选项，兼顾成熟度与通用性
+- `pq_dilithium`
+  - ML-DSA 的前身体系（CRYSTALS-Dilithium 路线）
+  - 适合已有 Dilithium 兼容需求的场景
+- `pq_aigis_sig`
+  - 格基签名路线的另一套实现
+  - 适合你明确需要该算法族兼容性的场景
+- `pq_slh_dsa`
+  - 基于哈希的签名路线（SLH-DSA / SPHINCS+）
+  - 优点是安全假设不同于格基；代价通常是签名体积更大、性能开销更高
+
+钱包工程建议：
+
+1. 默认主签名可优先考虑 `pq_ml_dsa`
+2. 若要做“异构抗风险”，可评估增加 `pq_slh_dsa` 作为备用签名族
+3. 如果你有历史兼容要求，再选择 `pq_dilithium` 或 `pq_aigis_sig`
+
 后量子 KEM 算法：
 
 - `pq_ml_kem_512`
@@ -141,6 +162,83 @@ func main() {
 	fmt.Println("verify:", ok)
 }
 ```
+
+## 钱包交易场景：哈希链回退签名
+
+本仓库已经提供一个完整流程测试，文件与用例：
+
+- `crypto/walletcrypto/tx_flow_cgo_test.go`
+- `TestWalletTxFlowWithHashChainRollbackAndPQSign`
+
+执行命令：
+
+```powershell
+cd crypto
+$env:CGO_ENABLED="1"
+go test -run TestWalletTxFlowWithHashChainRollbackAndPQSign ./walletcrypto/...
+```
+
+### 这句话到底是什么意思
+
+“先生成哈希链密钥，从最末端开始逐级回退使用”的含义是：
+
+1. 先准备一条链：`seed0 -> seed1 -> ... -> seedN`，其中 `seed(i+1)=Hash(seed(i))`
+2. 第一笔交易不用 `seed0`，而是先用 `seedN`（最末端）
+3. 下一笔用 `seedN-1`，再下一笔用 `seedN-2`，依次回退
+4. 每次交易都用当前 seed 派生一个新的 PQ 签名密钥（一次一把）
+
+### seed 到底是什么
+
+- seed 是“确定性派生材料”，不是链上账户地址，也不是交易本体
+- 在本仓库接口里，`GenerateKeyPairWithSeed(...)` 会用 seed 确定性生成一对签名密钥
+- 同一个算法 + 同一个 seed，会得到同一对密钥
+- 不同 seed 会得到不同密钥（因此可实现“一笔一钥”）
+- 标准区块链验签不需要 seed；只有你采用“哈希链回退增强模式”时，才需要额外校验 seed 链关系
+
+### 现实中怎么签名
+
+建议把“账户身份”和“交易签名”分离：
+
+- 账户身份/地址：用 `ECDSA` 公钥生成并保持不变
+- 每笔交易签名：用当前步的哈希链 seed 生成 `ML-DSA` 密钥并签名
+
+签名方每笔交易做：
+
+1. 取当前索引 `i` 对应 seed（从 `N` 往 `0` 走）
+2. `GenerateKeyPairWithSeed(AlgPQMLDSA, seed_i)` 生成当次 PQ 密钥
+3. 用 `SignMessage(AlgPQMLDSA, sk_i, txBytes)` 签名
+4. 在交易里携带：`pqPub_i`、`signature_i`、`step=i`，以及你协议里定义的哈希链证明字段
+5. 本地将索引更新到 `i-1`，禁止重复使用同一个 `seed_i`
+
+### 现实中怎么验证
+
+验证方每笔交易做：
+
+1. 用 `VerifyMessage(AlgPQMLDSA, pqPub_i, txBytes, signature_i)` 验签
+2. 校验哈希链回退关系：
+   - 若上一笔已披露 `seed_prev`，则验证 `Hash(seed_i) == seed_prev`
+   - 首笔还应校验到你预先锚定的链头承诺（例如 `seedN` 或其承诺值）
+3. 校验业务字段（nonce、余额、防重放规则等）
+
+### 常见疑问：链上验签到底要不要 seed
+
+分两种模式：
+
+1. 标准区块链验签模式（最常见）
+   - 不需要 seed
+   - 只需要消息、签名、公钥（或可解析出公钥的脚本/地址）
+   - 验证逻辑就是标准 `Verify(msg, sig, pubkey)`
+
+2. 哈希链回退增强模式（本文讨论的方案）
+   - 除了标准验签，还要验证哈希链连续性
+   - 验证者不需要“整串 seed”，只需要本笔披露值和链上已有承诺值
+   - 典型检查是 `Hash(seed_current) == seed_previous_or_anchor`
+
+### 注意事项
+
+- 这是“状态化签名流程”，钱包必须持久化当前索引 `i`
+- 一旦索引回退状态丢失，可能出现 seed 重用风险
+- 地址保持不变不代表签名公钥不变，签名公钥是每笔交易动态派生的
 
 ## 重要说明
 
