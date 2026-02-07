@@ -120,6 +120,45 @@
 
 如果你要使用 PQC（签名或 KEM），请确保本机具备可用 C 编译器（例如 Windows 下的 `gcc`）。
 
+### 4.4 快速启动（从 clone 到可调用）
+
+下面以 Windows + PowerShell 为例，给出最短启动路径。
+
+1. 克隆项目并进入 `crypto` 模块：
+
+```powershell
+git clone https://github.com/19231224lhr/CryptoArea.git
+cd CryptoArea/crypto
+```
+
+2. 验证基础能力（不依赖 cgo）：
+
+```powershell
+$env:CGO_ENABLED="0"
+go test ./walletcrypto/...
+```
+
+3. 验证 PQC 能力（需要 cgo + gcc）：
+
+```powershell
+$env:CGO_ENABLED="1"
+go test ./walletcrypto/...
+```
+
+4. 在你的业务代码中导入并调用：
+
+```go
+import "blockchain-crypto/walletcrypto"
+```
+
+如果你希望单独验证底层 `pqcgo`，可在仓库根目录执行：
+
+```powershell
+cd ../pqcgo
+$env:CGO_ENABLED="1"
+go test ./...
+```
+
 ## 5. 在其他项目中导入
 
 ## 5.1 包导入路径
