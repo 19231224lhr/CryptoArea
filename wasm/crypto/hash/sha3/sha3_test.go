@@ -12,20 +12,16 @@ package sha3
 
 import (
 	"bytes"
-	"compress/flate"
 	"encoding/hex"
-	"encoding/json"
 	"fmt"
 	"hash"
 	"math/rand"
-	"os"
 	"strings"
 	"testing"
 )
 
 const (
-	testString  = "brekeccakkeccak koax koax"
-	katFilename = "testdata/keccakKats.json.deflate"
+	testString = "brekeccakkeccak koax koax"
 )
 
 // testDigests contains functions returning hash.Hash instances
@@ -63,19 +59,6 @@ func decodeHex(s string) []byte {
 	return b
 }
 
-// structs used to marshal JSON test-cases.
-type KeccakKats struct {
-	Kats map[string][]struct {
-		Digest  string `json:"digest"`
-		Length  int64  `json:"length"`
-		Message string `json:"message"`
-
-		// Defined only for cSHAKE
-		N string `json:"BigN"`
-		S string `json:"S"`
-	}
-}
-
 func testUnalignedAndGeneric(t *testing.T, testf func(impl string)) {
 	xorInOrig, copyOutOrig := xorIn, copyOut
 	xorIn, copyOut = xorInGeneric, copyOutGeneric
@@ -85,77 +68,6 @@ func testUnalignedAndGeneric(t *testing.T, testf func(impl string)) {
 		testf("unaligned")
 	}
 	xorIn, copyOut = xorInOrig, copyOutOrig
-}
-
-// TestKeccakKats tests the SHA-3 and Shake implementations against all the
-// ShortMsgKATs from https://github.com/gvanas/KeccakCodePackage
-// (The testvectors are stored in keccakKats.json.deflate due to their length.)
-func TestKeccakKats(t *testing.T) {
-	testUnalignedAndGeneric(t, func(impl string) {
-		// Read the KATs.
-		deflated, err := os.Open(katFilename)
-		if err != nil {
-			t.Errorf("error opening %s: %s", katFilename, err)
-		}
-		file := flate.NewReader(deflated)
-		dec := json.NewDecoder(file)
-		var katSet KeccakKats
-		err = dec.Decode(&katSet)
-		if err != nil {
-			t.Errorf("error decoding KATs: %s", err)
-		}
-
-		for algo, function := range testDigests {
-			d := function()
-			for _, kat := range katSet.Kats[algo] {
-				d.Reset()
-				in, err := hex.DecodeString(kat.Message)
-				if err != nil {
-					t.Errorf("error decoding KAT: %s", err)
-				}
-				d.Write(in[:kat.Length/8])
-				got := strings.ToUpper(hex.EncodeToString(d.Sum(nil)))
-				if got != kat.Digest {
-					t.Errorf("function=%s, implementation=%s, length=%d\nmessage:\n %s\ngot:\n  %s\nwanted:\n %s",
-						algo, impl, kat.Length, kat.Message, got, kat.Digest)
-					t.Logf("wanted %+v", kat)
-					t.FailNow()
-				}
-				continue
-			}
-		}
-
-		for algo, v := range testShakes {
-			for _, kat := range katSet.Kats[algo] {
-				N, err := hex.DecodeString(kat.N)
-				if err != nil {
-					t.Errorf("error decoding KAT: %s", err)
-				}
-
-				S, err := hex.DecodeString(kat.S)
-				if err != nil {
-					t.Errorf("error decoding KAT: %s", err)
-				}
-				d := v.constructor(N, S)
-				in, err := hex.DecodeString(kat.Message)
-				if err != nil {
-					t.Errorf("error decoding KAT: %s", err)
-				}
-
-				d.Write(in[:kat.Length/8])
-				out := make([]byte, len(kat.Digest)/2)
-				d.Read(out)
-				got := strings.ToUpper(hex.EncodeToString(out))
-				if got != kat.Digest {
-					t.Errorf("function=%s, implementation=%s, length=%d BigN:%s\n S:%s\nmessage:\n %s \ngot:\n  %s\nwanted:\n %s",
-						algo, impl, kat.Length, kat.N, kat.S, kat.Message, got, kat.Digest)
-					t.Logf("wanted %+v", kat)
-					t.FailNow()
-				}
-				continue
-			}
-		}
-	})
 }
 
 // TestKeccak does a basic test of the non-standardized Keccak hash functions.

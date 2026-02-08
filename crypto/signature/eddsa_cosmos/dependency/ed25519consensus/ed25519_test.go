@@ -1,6 +1,7 @@
 package ed25519consensus_test
 
 import (
+	"blockchain-crypto/signature/eddsa_cosmos/dependency/ed25519consensus"
 	"crypto/ed25519"
 	"testing"
 )
@@ -12,6 +13,6 @@ func BenchmarkVerification(b *testing.B) {
 	signature := ed25519.Sign(priv, hash)
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		Verify(pub, hash, signature)
+		ed25519consensus.Verify(pub, hash, signature)
 	}
 }
