@@ -2,6 +2,12 @@
 
 本文面向希望将 `CryptoArea` 作为底层密码库接入的钱包、账户系统或交易系统。
 
+如果你是第一次进入本仓库，建议先看：
+
+1. [本文](./external-usage-guide.md)
+2. [密码服务目录](./crypto-services.md)
+3. [文档导航](./README.md)
+
 ## 1. 仓库角色
 
 `CryptoArea` 目前由两个核心 Go 模块组成：
