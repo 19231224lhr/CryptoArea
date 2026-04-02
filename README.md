@@ -36,6 +36,78 @@ import "github.com/19231224lhr/CryptoArea/crypto/walletcrypto"
 
 不建议业务代码一开始就直接耦合 `pqcgo`。
 
+## 外部工程师快速接入
+
+如果你是在一个全新的 Go 项目里接入 `CryptoArea`，最小流程如下：
+
+```powershell
+go mod init your-project
+go get github.com/19231224lhr/CryptoArea/crypto@<tag-or-commit>
+go mod tidy
+```
+
+然后在代码里导入：
+
+```go
+import "github.com/19231224lhr/CryptoArea/crypto/walletcrypto"
+```
+
+说明：
+
+- 已发布 tag 时，优先使用 tag
+- 若还未发布正式版本，可临时使用 commit hash
+- 不建议把带 `/` 的分支名直接写进 `go get ...@branch`，Go 的版本字符串规则对这类分支名不稳定
+
+## 下载源码后本地引用
+
+如果你不想先从远端拉模块，而是已经把 `CryptoArea` 仓库下载到了本地，也可以直接引用本地源码。
+
+需要注意一个 Go 的规则：
+
+- 代码里的 `import` 一般**仍然写模块路径**
+- 本地引用通常不是把 `import` 改成磁盘路径
+- 而是在 `go.mod` 里通过 `replace`，或者通过 `go work`，把模块解析到本地目录
+
+也就是说，代码里仍然建议写：
+
+```go
+import "github.com/19231224lhr/CryptoArea/crypto/walletcrypto"
+```
+
+### 方式 1：使用 `replace`
+
+假设你本地已经有：
+
+- `C:/path/to/CryptoArea/crypto`
+- `C:/path/to/CryptoArea/pqcgo`
+
+你的业务项目 `go.mod` 可以这样写：
+
+```go
+replace github.com/19231224lhr/CryptoArea/crypto => C:/path/to/CryptoArea/crypto
+replace github.com/19231224lhr/CryptoArea/pqcgo => C:/path/to/CryptoArea/pqcgo
+```
+
+然后执行：
+
+```powershell
+go mod tidy
+go run .
+```
+
+### 方式 2：使用 `go work`
+
+如果你本地同时维护业务项目和 `CryptoArea`，也可以用 workspace：
+
+```powershell
+go work init
+go work use C:/path/to/your-project
+go work use C:/path/to/CryptoArea/crypto
+go work use C:/path/to/CryptoArea/pqcgo
+```
+
+这种方式同样不需要改业务代码里的 `import`。
+
 ## 当前提供的核心能力
 
 | 能力类别 | 说明 |
@@ -109,14 +181,21 @@ import "github.com/19231224lhr/CryptoArea/crypto/walletcrypto"
 import "github.com/19231224lhr/CryptoArea/crypto/walletcrypto"
 ```
 
-### 2. 运行最小示例
+### 2. 拉取依赖
+
+```powershell
+go get github.com/19231224lhr/CryptoArea/crypto@<tag-or-commit>
+go mod tidy
+```
+
+### 3. 运行最小示例
 
 ```powershell
 cd crypto
 go run ./examples/walletcrypto-seedchain-demo
 ```
 
-### 3. 做一次基础验证
+### 4. 做一次基础验证
 
 无 `cgo` 环境下先验证经典能力：
 

@@ -81,7 +81,7 @@ go test -count=1 ./...
 
 ## 4. 外部消费者烟测
 
-采用临时消费者模块进行本地接入验证。
+采用临时消费者模块进行接入验证，覆盖本地联调和远端直接消费两种场景。
 
 ### 4.1 经典算法 + Seed-chain
 
@@ -120,6 +120,28 @@ go run .
 结果：
 
 - 输出：`external pq consumer ok true`
+
+### 4.3 远端模块直接接入验证
+
+采用临时消费者模块，不使用本地 `replace`，直接从远端拉取：
+
+```powershell
+go mod init example.com/remotefinal
+go get github.com/19231224lhr/CryptoArea/crypto@7a9968f
+go mod tidy
+go run .
+```
+
+验证代码只导入：
+
+```go
+import "github.com/19231224lhr/CryptoArea/crypto/walletcrypto"
+```
+
+结果：
+
+- 输出：`alg: ecdsa`
+- 证明远端模块路径可被真实外部工程直接消费
 
 ## 5. 本轮发现并修复的发布阻塞项
 
@@ -161,6 +183,19 @@ go run .
 - 同步更新仓库内 import、README、接入文档与外部烟测
 - 同时将 `wasm/crypto` 调整为独立模块路径 `github.com/19231224lhr/CryptoArea/wasm/crypto`
 
+### 5.4 crypto 模块对 pqcgo 的版本声明无法被远端消费者正确解析
+
+原问题：
+
+- `crypto/go.mod` 里对 `github.com/19231224lhr/CryptoArea/pqcgo` 使用了 `v0.0.0`
+- 本地 `replace` 场景可以工作
+- 但真实外部消费者直接从远端拉取 `crypto` 模块时，会因为 `pqcgo` 版本解析失败而无法完成依赖解析
+
+修复：
+
+- 将 `crypto/go.mod` 中的 `pqcgo` 依赖改为可解析的伪版本
+- 重新执行远端直接消费烟测，确认 `go get + go mod tidy + go run` 全流程通过
+
 ## 6. 当前结论
 
 可以认为 `CryptoArea` 已达到“对外接入前的基础发布可用水平”：
@@ -169,6 +204,7 @@ go run .
 - PQ 子模块可测试
 - WASM 模块可测试
 - 外部消费者本地烟测可通过
+- 外部消费者远端直接接入烟测可通过
 - `walletcrypto` 已具备更清晰的对外能力边界
 
 ## 7. 仍建议继续补强的项

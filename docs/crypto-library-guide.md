@@ -87,11 +87,18 @@ signature  pqcgo      ← 经典签名 / 后量子签名+KEM
   hash   PQMagic C库   ← 哈希实现 / 后量子 C 实现
 ```
 
-`crypto/walletcrypto` 通过 Go `replace` 指令引用 `pqcgo`：
+仓库内部开发时，`crypto/walletcrypto` 通过 Go `replace` 指令引用本地 `pqcgo`：
 
 ```go
 // crypto/go.mod
 replace github.com/19231224lhr/CryptoArea/pqcgo => ../pqcgo
+```
+
+对外项目接入时，不应默认照搬这段 `replace`。正常外部使用应优先通过：
+
+```powershell
+go get github.com/19231224lhr/CryptoArea/crypto@<tag-or-commit>
+go mod tidy
 ```
 
 ---
@@ -1160,7 +1167,7 @@ type FlowAddressData struct {
 所有密钥操作统一通过 `CryptoArea/crypto/walletcrypto` 包完成：
 
 ```go
-import "github.com/panguPay/CryptoArea/crypto/walletcrypto"
+import "github.com/19231224lhr/CryptoArea/crypto/walletcrypto"
 
 // ① masterSeed 生成
 masterSeed := walletcrypto.RandomBytes(32)

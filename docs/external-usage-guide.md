@@ -23,6 +23,78 @@
 import "github.com/19231224lhr/CryptoArea/crypto/walletcrypto"
 ```
 
+## 1.1 最小接入步骤
+
+如果你是在一个新的 Go 项目里接入，推荐顺序如下：
+
+```powershell
+go mod init your-project
+go get github.com/19231224lhr/CryptoArea/crypto@<tag-or-commit>
+go mod tidy
+```
+
+然后在代码中导入：
+
+```go
+import "github.com/19231224lhr/CryptoArea/crypto/walletcrypto"
+```
+
+建议：
+
+- 有正式 tag 时，优先使用 tag
+- 还没发版但需要提前接入时，使用 commit hash
+- 不建议把带 `/` 的分支名直接写进 `go get ...@branch`
+
+## 1.2 下载源码后本地引用
+
+如果你已经把 `CryptoArea` 下载到本地，不想先从远端拉模块，也可以直接引用本地源码。
+
+这里有一个重要点：
+
+- Go 代码中的 `import` 通常仍然保持模块路径
+- 不建议把 `import` 直接写成 Windows 或 Linux 文件路径
+- 正确做法是通过 `replace` 或 `go work` 把模块解析到本地目录
+
+也就是说，代码里仍然建议写：
+
+```go
+import "github.com/19231224lhr/CryptoArea/crypto/walletcrypto"
+```
+
+### 方式 A：`go.mod` + `replace`
+
+假设你本地有：
+
+- `/path/to/CryptoArea/crypto`
+- `/path/to/CryptoArea/pqcgo`
+
+那么业务项目里可写：
+
+```go
+replace github.com/19231224lhr/CryptoArea/crypto => /path/to/CryptoArea/crypto
+replace github.com/19231224lhr/CryptoArea/pqcgo => /path/to/CryptoArea/pqcgo
+```
+
+然后执行：
+
+```powershell
+go mod tidy
+go run .
+```
+
+### 方式 B：使用 `go work`
+
+如果你本地同时维护业务项目和 `CryptoArea`，可以使用 workspace：
+
+```powershell
+go work init
+go work use /path/to/your-project
+go work use /path/to/CryptoArea/crypto
+go work use /path/to/CryptoArea/pqcgo
+```
+
+这种方式适合多仓库并行开发，同样不需要改源码里的 `import`。
+
 ## 2. 当前可直接使用的能力
 
 | 能力类别 | 主要 API |
@@ -137,6 +209,8 @@ replace github.com/19231224lhr/CryptoArea/pqcgo => /path/to/CryptoArea/pqcgo
 - 你改动 `crypto/` 后，消费者立刻看到最新 `walletcrypto`
 - 你改动 `pqcgo/` 后，消费者不会误拉远端旧版本
 
+如果你只是普通外部接入，而不是本地联调，请不要默认加 `replace`，直接使用远端模块即可。
+
 ## 7. CGO 说明
 
 - `CGO_ENABLED=0`
@@ -147,7 +221,14 @@ replace github.com/19231224lhr/CryptoArea/pqcgo => /path/to/CryptoArea/pqcgo
   - 可启用真实 PQ 签名 / KEM
   - 需要本机具备可用的 C 编译工具链
 
-## 8. 推荐阅读顺序
+## 8. 真实接入时的常见提醒
+
+- `go get` 之后建议补一次 `go mod tidy`
+- 仅导入 `walletcrypto.AlgECDSA` 这类经典能力时，不需要启用 `cgo`
+- 需要 PQ 签名 / KEM 时，再准备 `CGO_ENABLED=1` 环境
+- 若当前版本尚未打 tag，推荐用 commit hash 固定依赖版本
+
+## 9. 推荐阅读顺序
 
 1. [README.md](../README.md)
 2. [crypto/README.MD](../crypto/README.MD)
