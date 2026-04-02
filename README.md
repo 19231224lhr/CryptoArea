@@ -140,6 +140,84 @@ go work use C:/path/to/CryptoArea/pqcgo
 
 如需完整的 API 和能力边界，请看 [docs/crypto-services.md](./docs/crypto-services.md)。
 
+## 设计规范参考：做成可替换的密码基座
+
+如果其他项目要接入 `CryptoArea`，我们建议不要把某一种密码算法直接写死在业务逻辑里，而是把密码相关模块设计成**可替换、可扩展的底层基座**。
+
+推荐思路是：
+
+- 业务层只依赖统一接口，不直接依赖具体算法实现
+- 在配置、交易结构、账户结构或密钥元数据中保留一个“算法类型字段”
+- 根据该字段在运行时选择具体密码实现
+
+可以用整数枚举，也可以用字符串枚举。  
+如果项目已经有固定的协议字段，使用 `type=0/1/2...` 这种方式是完全可以的。
+
+例如：
+
+| `type` | 含义 | 建议对应算法 |
+| --- | --- | --- |
+| `0` | 经典默认签名 | `ecdsa` |
+| `1` | 默认后量子签名 | `pq_ml_dsa` |
+| `2` | 兼容型后量子签名 | `pq_dilithium` |
+| `3` | 哈希基后量子签名 | `pq_slh_dsa` |
+
+核心目标不是这个数字本身，而是：
+
+- **上层协议稳定**
+- **底层算法可替换**
+- **新增算法时不需要重写业务流程**
+
+推荐把以下能力都放到同一套可替换抽象下面：
+
+- 密钥生成
+- 签名
+- 验签
+- 地址生成
+- Seed-chain 派生
+- KEM
+
+也就是说，上层最好只认这种统一入口：
+
+```go
+GenerateKeyPair(algType, ...)
+SignMessage(algType, ...)
+VerifyMessage(algType, ...)
+GenerateAddress(algType, ...)
+```
+
+而不是在业务代码里到处分支调用不同算法包。
+
+### 一个建议的接入模型
+
+```go
+type CryptoType int
+
+const (
+    CryptoTypeECDSA CryptoType = 0
+    CryptoTypePQMLDSA CryptoType = 1
+    CryptoTypePQDilithium CryptoType = 2
+    CryptoTypePQSLHDSA CryptoType = 3
+)
+```
+
+然后在你的账户、地址、交易输入、签名元数据里带上这个字段，由底层统一分发到具体实现。
+
+### 这样做的好处
+
+- 经典密码切到后量子密码时，业务层改动最小
+- 一个系统里可以并存多种算法
+- 可以逐步迁移，不需要一次性替换所有历史数据
+- 更适合把 `CryptoArea` 当成长期可演进的密码底座
+
+如果你只想先快速接入，仍然建议从默认入口开始：
+
+```go
+import "github.com/19231224lhr/CryptoArea/crypto/walletcrypto"
+```
+
+后续再把算法选择从“写死”逐步提升到“可配置 / 可协商 / 可迁移”。
+
 ## 文档分类
 
 `docs/` 里的文档按用途可以这样理解：
