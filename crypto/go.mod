@@ -16,7 +16,7 @@ require (
 	cosmossdk.io/collections v0.4.0
 	cosmossdk.io/errors v1.0.1
 	filippo.io/edwards25519 v1.0.0
-	github.com/19231224lhr/CryptoArea/pqcgo v0.0.0
+	github.com/19231224lhr/CryptoArea/pqcgo v0.0.0-20260402113032-6a8c97df5dd0
 	github.com/cometbft/cometbft v0.38.12
 	github.com/cosmos/cosmos-sdk v0.50.10
 	github.com/cosmos/gogoproto v1.7.0
