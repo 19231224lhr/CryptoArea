@@ -13,7 +13,7 @@ import (
 	"errors"
 	"math/bits"
 
-	"blockchain-crypto/hash/scrypt/pbkdf2"
+	"github.com/19231224lhr/CryptoArea/crypto/hash/scrypt/pbkdf2"
 )
 
 const maxInt = int(^uint(0) >> 1)
@@ -210,3 +210,4 @@ func Key(password, salt []byte, N, r, p, keyLen int) ([]byte, error) {
 
 	return pbkdf2.Key(password, b, 1, keyLen, sha256.New), nil
 }
+

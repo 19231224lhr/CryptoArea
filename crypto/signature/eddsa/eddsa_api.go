@@ -1,7 +1,7 @@
 package eddsa
 
 import (
-	"blockchain-crypto/signature/eddsa/dependency"
+	"github.com/19231224lhr/CryptoArea/crypto/signature/eddsa/dependency"
 	"crypto/rand"
 )
 
@@ -35,3 +35,4 @@ func SignApi(sk []byte, msg []byte) (sig []byte) {
 func VerifyApi(pk []byte, mes []byte, sig []byte) bool {
 	return dependency.Verify(pk, mes, sig)
 }
+

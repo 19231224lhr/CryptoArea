@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"math/big"
 
-	"blockchain-crypto/hash/poseidon/ff"
+	"github.com/19231224lhr/CryptoArea/crypto/hash/poseidon/ff"
 )
 
 type constantsStr struct {
@@ -24902,3 +24902,4 @@ var cs = constantsStr{
 		},
 	},
 }
+

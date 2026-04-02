@@ -1,7 +1,7 @@
 package dependency
 
 import (
-	"blockchain-crypto/hash"
+	"github.com/19231224lhr/CryptoArea/crypto/hash"
 	"crypto/ecdsa"
 	"crypto/elliptic"
 	cryptorand "crypto/rand"
@@ -11,7 +11,7 @@ import (
 	"io"
 	"math/big"
 
-	"blockchain-crypto/signature/ec_schnorr/dependency/common"
+	"github.com/19231224lhr/CryptoArea/crypto/signature/ec_schnorr/dependency/common"
 )
 
 var (
@@ -318,3 +318,4 @@ func Verify(publicKey *ecdsa.PublicKey, sig []byte, message []byte) (valid bool,
 	}
 	return true, nil
 }
+

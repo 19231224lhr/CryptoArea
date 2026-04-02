@@ -1,8 +1,8 @@
 package walletcrypto
 
 import (
-	"blockchain-crypto/hash/ripemd160"
-	"blockchain-crypto/hash/sha3"
+	"github.com/19231224lhr/CryptoArea/crypto/hash/ripemd160"
+	"github.com/19231224lhr/CryptoArea/crypto/hash/sha3"
 	"crypto/hmac"
 	"crypto/rand"
 	"crypto/sha256"
@@ -50,3 +50,4 @@ func HMACSHA256(key []byte, data []byte) []byte {
 	m.Write(data)
 	return m.Sum(nil)
 }
+

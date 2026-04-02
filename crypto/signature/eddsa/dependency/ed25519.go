@@ -24,7 +24,7 @@ import (
 	"io"
 	"strconv"
 
-	"blockchain-crypto/signature/eddsa/dependency/edwards25519"
+	"github.com/19231224lhr/CryptoArea/crypto/signature/eddsa/dependency/edwards25519"
 )
 
 const (
@@ -223,3 +223,4 @@ func Verify(publicKey PublicKey, message, sig []byte) bool {
 	R.ToBytes(&checkR)
 	return bytes.Equal(sig[:32], checkR[:])
 }
+

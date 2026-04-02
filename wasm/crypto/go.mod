@@ -1,8 +1,6 @@
-module blockchain-crypto
+module github.com/19231224lhr/CryptoArea/wasm/crypto
 
-go 1.22.7
-
-toolchain go1.22.9
+go 1.22.9
 
 replace github.com/cosmos/cosmos-sdk/x/auth => cosmossdk.io/x/auth v0.0.0
 
@@ -10,10 +8,13 @@ replace github.com/cosmos/cosmos-sdk/x/bank => cosmossdk.io/x/bank v0.0.0
 
 replace github.com/cosmos/cosmos-sdk/x/staking => cosmossdk.io/x/staking v0.0.0
 
+replace github.com/19231224lhr/CryptoArea/crypto => ../../crypto
+
 require (
 	cosmossdk.io/collections v0.4.0
 	cosmossdk.io/errors v1.0.1
 	filippo.io/edwards25519 v1.0.0
+	github.com/19231224lhr/CryptoArea/crypto v0.0.0
 	github.com/cometbft/cometbft v0.38.12
 	github.com/cosmos/cosmos-sdk v0.50.10
 	github.com/cosmos/gogoproto v1.7.0

@@ -21,7 +21,7 @@
 
 ```
 pqc-utxo-simulator/
-├── go.mod                          ← 依赖 blockchain-crypto 和 teddycode/pqcgo
+├── go.mod                          ← 依赖 github.com/19231224lhr/CryptoArea/crypto 和 github.com/19231224lhr/CryptoArea/pqcgo
 ├── main.go                         ← 入口：运行完整模拟流程
 ├── core/                           ← 区块链核心数据结构
 │   ├── transaction.go              ← 交易、TXInput、TXOutput
@@ -55,12 +55,12 @@ module pqc-utxo-simulator
 
 go 1.22.9
 
-replace blockchain-crypto => ../CryptoArea/crypto
-replace teddycode/pqcgo => ../CryptoArea/pqcgo
+replace github.com/19231224lhr/CryptoArea/crypto => ../CryptoArea/crypto
+replace github.com/19231224lhr/CryptoArea/pqcgo => ../CryptoArea/pqcgo
 
 require (
-    blockchain-crypto v0.0.0
-    teddycode/pqcgo v0.0.0
+    github.com/19231224lhr/CryptoArea/crypto v0.0.0
+    github.com/19231224lhr/CryptoArea/pqcgo v0.0.0
 )
 ```
 
@@ -934,3 +934,4 @@ go test -bench=. -benchtime=5s ./tests/
 - [ ] 实现 `simulate/scenario_basic.go`
 - [ ] 编写并通过全部单元测试
 - [ ] 运行完整模拟并输出结果
+

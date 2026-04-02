@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"math/big"
 
-	"blockchain-crypto/hash/poseidon/ff"
-	"blockchain-crypto/hash/poseidon/utils"
+	"github.com/19231224lhr/CryptoArea/crypto/hash/poseidon/ff"
+	"github.com/19231224lhr/CryptoArea/crypto/hash/poseidon/utils"
 )
 
 const NROUNDSF = 8 //nolint:golint
@@ -174,3 +174,4 @@ func HashBytes(msg []byte) (*big.Int, error) {
 
 	return hash, nil
 }
+

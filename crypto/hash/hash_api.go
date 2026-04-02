@@ -1,12 +1,12 @@
 package hash
 
 import (
-	"blockchain-crypto/hash/poseidon"
-	"blockchain-crypto/hash/ripemd160"
-	"blockchain-crypto/hash/scrypt"
-	"blockchain-crypto/hash/sha256"
-	"blockchain-crypto/hash/sha3"
-	"blockchain-crypto/hash/sha512"
+	"github.com/19231224lhr/CryptoArea/crypto/hash/poseidon"
+	"github.com/19231224lhr/CryptoArea/crypto/hash/ripemd160"
+	"github.com/19231224lhr/CryptoArea/crypto/hash/scrypt"
+	"github.com/19231224lhr/CryptoArea/crypto/hash/sha256"
+	"github.com/19231224lhr/CryptoArea/crypto/hash/sha3"
+	"github.com/19231224lhr/CryptoArea/crypto/hash/sha512"
 )
 
 // Args 可选参数结构体
@@ -80,3 +80,4 @@ func Hash(hashType string, input []byte, options ...Option) []byte {
 
 	return bytes
 }
+

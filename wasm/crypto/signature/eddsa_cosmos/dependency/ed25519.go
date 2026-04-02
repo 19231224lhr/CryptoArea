@@ -1,17 +1,17 @@
 package ed25519
 
 import (
-	crypto "blockchain-crypto/signature/eddsa_cosmos/dependency/cometcrypto"
+	crypto "github.com/19231224lhr/CryptoArea/crypto/signature/eddsa_cosmos/dependency/cometcrypto"
 	"crypto/ed25519"
 	"crypto/subtle"
 	"errors"
 	"fmt"
 	"io"
 
-	"blockchain-crypto/signature/eddsa_cosmos/dependency/cometcrypto/tmhash"
-	"blockchain-crypto/signature/eddsa_cosmos/dependency/ed25519consensus"
+	"github.com/19231224lhr/CryptoArea/crypto/signature/eddsa_cosmos/dependency/cometcrypto/tmhash"
+	"github.com/19231224lhr/CryptoArea/crypto/signature/eddsa_cosmos/dependency/ed25519consensus"
 
-	cryptotypes "blockchain-crypto/signature/eddsa_cosmos/dependency/types"
+	cryptotypes "github.com/19231224lhr/CryptoArea/crypto/signature/eddsa_cosmos/dependency/types"
 )
 
 const (
@@ -226,3 +226,4 @@ func (pubKey PubKey) MarshalAminoJSON() ([]byte, error) {
 func (pubKey *PubKey) UnmarshalAminoJSON(bz []byte) error {
 	return pubKey.UnmarshalAmino(bz)
 }
+

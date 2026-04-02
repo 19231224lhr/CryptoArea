@@ -7,8 +7,8 @@ import (
 	"math/big"
 	"strings"
 
-	"blockchain-crypto/hash/poseidon/constants"
-	"blockchain-crypto/hash/poseidon/ff"
+	"github.com/19231224lhr/CryptoArea/crypto/hash/poseidon/constants"
+	"github.com/19231224lhr/CryptoArea/crypto/hash/poseidon/ff"
 )
 
 // NewIntFromString creates a new big.Int from a decimal integer encoded as a
@@ -123,3 +123,4 @@ func ElementArrayToBigIntArray(e []*ff.Element) []*big.Int {
 	}
 	return o
 }
+

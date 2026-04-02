@@ -27,7 +27,7 @@
 
 ```
 CryptoArea/
-├── crypto/                    ← Go 模块 "blockchain-crypto"
+├── crypto/                    ← Go 模块 "github.com/19231224lhr/CryptoArea/crypto"
 │   ├── hash/                  ← 哈希算法集合
 │   │   ├── sha256/
 │   │   ├── sha512/
@@ -51,7 +51,7 @@ CryptoArea/
 │       ├── keystore.go        ← 私钥加密存储
 │       ├── types.go           ← 类型定义和算法常量
 │       └── utils.go           ← 哈希、随机数工具
-├── pqcgo/                     ← Go 模块 "teddycode/pqcgo"
+├── pqcgo/                     ← Go 模块 "github.com/19231224lhr/CryptoArea/pqcgo"
 │   ├── constants.go           ← PQC 签名算法参数常量
 │   ├── kem_constants.go       ← PQC KEM 算法参数常量
 │   ├── pqcsign.go             ← PQC 签名 cgo 封装（cgo 构建）
@@ -91,7 +91,7 @@ signature  pqcgo      ← 经典签名 / 后量子签名+KEM
 
 ```go
 // crypto/go.mod
-replace teddycode/pqcgo => ../pqcgo
+replace github.com/19231224lhr/CryptoArea/pqcgo => ../pqcgo
 ```
 
 ---
@@ -150,7 +150,7 @@ replace teddycode/pqcgo => ../pqcgo
 ### 3.1 密钥生成
 
 ```go
-import "blockchain-crypto/walletcrypto"
+import "github.com/19231224lhr/CryptoArea/crypto/walletcrypto"
 
 // 随机生成密钥对
 kp, err := walletcrypto.GenerateKeyPair("pq_ml_dsa")
@@ -2349,3 +2349,4 @@ go test -bench=. -benchtime=10s ./...
 17. **首次收款引导**：新用户首次收款前，钱包应生成含 anchor 的收款码，或通过担保组织注册 anchor。
 
 ```
+

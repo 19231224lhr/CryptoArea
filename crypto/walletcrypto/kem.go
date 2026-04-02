@@ -2,8 +2,8 @@ package walletcrypto
 
 import (
 	"fmt"
+	"github.com/19231224lhr/CryptoArea/pqcgo"
 	"strings"
-	"teddycode/pqcgo"
 )
 
 var kemAliases = map[string]string{

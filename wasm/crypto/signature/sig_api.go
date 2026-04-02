@@ -1,12 +1,12 @@
 package signature
 
 import (
-	bls "blockchain-crypto/signature/bls/bls12381"
-	"blockchain-crypto/signature/ec_schnorr"
-	"blockchain-crypto/signature/ecdsa"
-	"blockchain-crypto/signature/eddsa"
-	"blockchain-crypto/signature/eddsa_cosmos"
-	"blockchain-crypto/signature/sm2"
+	bls "github.com/19231224lhr/CryptoArea/crypto/signature/bls/bls12381"
+	"github.com/19231224lhr/CryptoArea/crypto/signature/ec_schnorr"
+	"github.com/19231224lhr/CryptoArea/crypto/signature/ecdsa"
+	"github.com/19231224lhr/CryptoArea/crypto/signature/eddsa"
+	"github.com/19231224lhr/CryptoArea/crypto/signature/eddsa_cosmos"
+	"github.com/19231224lhr/CryptoArea/crypto/signature/sm2"
 	"bytes"
 )
 
@@ -242,3 +242,4 @@ func VerifyKeyGen(scheme string, forwardPK, backwardSK, backwardPK []byte) bool 
 		}
 	}
 }
+

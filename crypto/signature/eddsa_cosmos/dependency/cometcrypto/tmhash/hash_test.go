@@ -1,7 +1,7 @@
 package tmhash_test
 
 import (
-	"blockchain-crypto/signature/eddsa_cosmos/dependency/cometcrypto/tmhash"
+	"github.com/19231224lhr/CryptoArea/crypto/signature/eddsa_cosmos/dependency/cometcrypto/tmhash"
 	"crypto/sha256"
 	"testing"
 
@@ -45,3 +45,4 @@ func TestHashTruncated(t *testing.T) {
 	assert.Equal(t, bz, bz2)
 	assert.Equal(t, bz, bz3)
 }
+

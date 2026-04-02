@@ -1,8 +1,8 @@
 package ed25519
 
 import (
-	crypto "blockchain-crypto/signature/eddsa_cosmos/dependency/cometcrypto"
-	cryptotypes "blockchain-crypto/signature/eddsa_cosmos/dependency/types"
+	crypto "github.com/19231224lhr/CryptoArea/crypto/signature/eddsa_cosmos/dependency/cometcrypto"
+	cryptotypes "github.com/19231224lhr/CryptoArea/crypto/signature/eddsa_cosmos/dependency/types"
 	stded25519 "crypto/ed25519"
 	"testing"
 
@@ -109,3 +109,4 @@ func TestPrivKeyEquals(t *testing.T) {
 		})
 	}
 }
+

@@ -1,8 +1,8 @@
 package walletcrypto
 
 import (
-	"blockchain-crypto/hash/ripemd160"
-	"blockchain-crypto/hash/sha3"
+	"github.com/19231224lhr/CryptoArea/crypto/hash/ripemd160"
+	"github.com/19231224lhr/CryptoArea/crypto/hash/sha3"
 	"crypto/sha256"
 	"encoding/hex"
 	"fmt"
@@ -92,3 +92,4 @@ func base58Encode(input []byte) string {
 	}
 	return string(out)
 }
+

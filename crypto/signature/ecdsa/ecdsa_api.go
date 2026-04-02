@@ -1,7 +1,7 @@
 package ecdsa
 
 import (
-	"blockchain-crypto/signature/ecdsa/dependency"
+	"github.com/19231224lhr/CryptoArea/crypto/signature/ecdsa/dependency"
 )
 
 // 所有api函数的输入输出均为由字节数组转化成的字符串（验证输出是bool）
@@ -40,3 +40,4 @@ func VerifyApi(pubk []byte, meshashed []byte, sig []byte) bool {
 	sign, _ := dependency.ParseSignature(sig, dependency.S256())
 	return sign.Verify(meshashed, pk)
 }
+

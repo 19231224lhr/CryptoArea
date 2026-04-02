@@ -1,7 +1,7 @@
 package koblitz
 
 import (
-	. "blockchain-crypto/types/curve/bn254"
+	. "github.com/19231224lhr/CryptoArea/crypto/types/curve/bn254"
 	"math/big"
 )
 
@@ -69,3 +69,4 @@ func DecodeFromBN254G1(point *PointG1) *big.Int {
 	x := ToBig(&g1.Affine(point)[0])
 	return new(big.Int).Div(x, kBig)
 }
+

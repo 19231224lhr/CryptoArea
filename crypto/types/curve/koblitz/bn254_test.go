@@ -6,7 +6,7 @@ import (
 	"math/big"
 	"testing"
 
-	"blockchain-crypto/types/curve/bn254"
+	"github.com/19231224lhr/CryptoArea/crypto/types/curve/bn254"
 )
 
 func TestIsOnCurve(t *testing.T) {
@@ -53,3 +53,4 @@ func Test1(t *testing.T) {
 	fmt.Println(maxNum)
 	fmt.Println(maxNum.BitLen())
 }
+

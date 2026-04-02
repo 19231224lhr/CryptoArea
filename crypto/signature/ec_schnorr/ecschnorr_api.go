@@ -1,7 +1,7 @@
 package ec_schnorr
 
 import (
-	"blockchain-crypto/signature/ec_schnorr/dependency"
+	"github.com/19231224lhr/CryptoArea/crypto/signature/ec_schnorr/dependency"
 	"crypto/elliptic"
 )
 
@@ -44,3 +44,4 @@ func VerifyApi(pubk []byte, mes []byte, sig []byte) bool {
 	result, _ := dependency.Verify(pk, sig, mes)
 	return result
 }
+

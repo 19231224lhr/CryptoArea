@@ -1,10 +1,10 @@
 package walletcrypto
 
 import (
-	"blockchain-crypto/signature"
+	"github.com/19231224lhr/CryptoArea/crypto/signature"
 	"fmt"
+	"github.com/19231224lhr/CryptoArea/pqcgo"
 	"strings"
-	"teddycode/pqcgo"
 )
 
 type algorithmKind int
@@ -188,3 +188,4 @@ func resolveAlgorithm(algorithm string) (resolvedAlgorithm, error) {
 
 	return resolvedAlgorithm{}, fmt.Errorf("unsupported algorithm: %s", algorithm)
 }
+

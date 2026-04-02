@@ -1,6 +1,6 @@
 package eddsa_cosmos
 
-import "blockchain-crypto/signature/eddsa_cosmos/dependency"
+import "github.com/19231224lhr/CryptoArea/crypto/signature/eddsa_cosmos/dependency"
 
 // 所有 api 函数的输入输出均为由字节数组转化成的字符串（验证输出是bool）
 
@@ -47,3 +47,4 @@ func VerifyApi(pubk []byte, mes []byte, sig []byte) bool {
 	pk.Unmarshal(pubk)
 	return pk.VerifySignature(mes, sig)
 }
+

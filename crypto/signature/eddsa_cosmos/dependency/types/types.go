@@ -1,8 +1,8 @@
 package types
 
 import (
-	cmtcrypto "blockchain-crypto/signature/eddsa_cosmos/dependency/cometcrypto"
-	proto "blockchain-crypto/signature/eddsa_cosmos/dependency/proto"
+	cmtcrypto "github.com/19231224lhr/CryptoArea/crypto/signature/eddsa_cosmos/dependency/cometcrypto"
+	proto "github.com/19231224lhr/CryptoArea/crypto/signature/eddsa_cosmos/dependency/proto"
 )
 
 // PubKey defines a public key and extends proto.Message.
@@ -52,3 +52,4 @@ type PrivKey interface {
 type (
 	Address = cmtcrypto.Address
 )
+

@@ -1,7 +1,7 @@
 package bls12381
 
 import (
-	. "blockchain-crypto/types/curve/bls12381"
+	. "github.com/19231224lhr/CryptoArea/crypto/types/curve/bls12381"
 	"crypto/rand"
 )
 
@@ -73,3 +73,4 @@ func VerifyAPI(pk []byte, message []byte, signature []byte) bool {
 	// e(g_1,σ) ?= e(y,h)
 	return NewPairingEngine().AddPair(pkPoint, h).AddPairInv(group1.One(), signaturePoint).Check()
 }
+

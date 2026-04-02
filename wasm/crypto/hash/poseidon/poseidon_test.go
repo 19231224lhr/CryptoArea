@@ -6,7 +6,7 @@ import (
 	"math/big"
 	"testing"
 
-	"blockchain-crypto/hash/poseidon/utils"
+	"github.com/19231224lhr/CryptoArea/crypto/hash/poseidon/utils"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -237,3 +237,4 @@ func BenchmarkPoseidonHash16Inputs(b *testing.B) {
 		Hash(bigArray16) //nolint:errcheck,gosec
 	}
 }
+

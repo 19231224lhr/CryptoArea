@@ -3,7 +3,7 @@
 package main
 
 import (
-	"blockchain-crypto/signature"
+	"github.com/19231224lhr/CryptoArea/crypto/signature"
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
@@ -172,3 +172,4 @@ func jsonWrapper() js.Func {
 	})
 	return jsonFunc
 }
+

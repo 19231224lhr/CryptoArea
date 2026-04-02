@@ -1,7 +1,7 @@
 package sm2
 
 import (
-	"blockchain-crypto/signature/sm2/dependency"
+	"github.com/19231224lhr/CryptoArea/crypto/signature/sm2/dependency"
 	"crypto/rand"
 	"math/big"
 )
@@ -51,3 +51,4 @@ func VerifyApi(pubk []byte, mes []byte, sig []byte) bool {
 	pk := dependency.Decompress(pubk)
 	return pk.Verify(mes, sig)
 }
+

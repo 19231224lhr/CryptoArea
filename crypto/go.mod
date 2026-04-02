@@ -1,4 +1,4 @@
-module blockchain-crypto
+module github.com/19231224lhr/CryptoArea/crypto
 
 go 1.22.9
 
@@ -10,12 +10,13 @@ replace github.com/cosmos/cosmos-sdk/x/bank => cosmossdk.io/x/bank v0.0.0
 
 replace github.com/cosmos/cosmos-sdk/x/staking => cosmossdk.io/x/staking v0.0.0
 
-replace teddycode/pqcgo => ../pqcgo
+replace github.com/19231224lhr/CryptoArea/pqcgo => ../pqcgo
 
 require (
 	cosmossdk.io/collections v0.4.0
 	cosmossdk.io/errors v1.0.1
 	filippo.io/edwards25519 v1.0.0
+	github.com/19231224lhr/CryptoArea/pqcgo v0.0.0
 	github.com/cometbft/cometbft v0.38.12
 	github.com/cosmos/cosmos-sdk v0.50.10
 	github.com/cosmos/gogoproto v1.7.0
@@ -30,7 +31,6 @@ require (
 	google.golang.org/protobuf v1.34.2
 	pgregory.net/rapid v1.1.0
 	sigs.k8s.io/yaml v1.4.0
-	teddycode/pqcgo v0.0.0
 )
 
 require (

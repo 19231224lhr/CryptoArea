@@ -1,4 +1,4 @@
-﻿# crypto-suites
+# crypto-suites
 
 `crypto-suites` 是一个面向钱包场景的密码能力库，整合了经典密码和后量子密码能力。
 
@@ -7,6 +7,7 @@
 - 私钥/公钥生成
 - 签名与验签
 - 地址生成
+- Seed-chain（哈希链一次一钥）辅助
 - 后量子 KEM（密钥封装/解封装）
 - keystore（私钥加密存储）
 - 常用哈希/HMAC/随机数工具
@@ -22,6 +23,13 @@
 - `wasm/`
   - wasm 相关封装与测试代码
 
+## 文档
+
+- 外部接入说明：[`docs/external-usage-guide.md`](./docs/external-usage-guide.md)
+- 密码服务目录：[`docs/crypto-services.md`](./docs/crypto-services.md)
+- 发布前验证记录：[`docs/release-validation.md`](./docs/release-validation.md)
+- 发布清单：[`docs/release-checklist.md`](./docs/release-checklist.md)
+
 ## 推荐使用入口
 
 钱包项目请优先通过 `crypto/walletcrypto` 使用，不建议业务层直接耦合底层多个模块。
@@ -29,7 +37,7 @@
 导入路径：
 
 ```go
-import "blockchain-crypto/walletcrypto"
+import "github.com/19231224lhr/CryptoArea/crypto/walletcrypto"
 ```
 
 ## 支持算法
@@ -127,6 +135,13 @@ go test ./...
   - `DecapsulateSharedSecret`
 - 地址生成
   - `GenerateAddress`
+- Seed-chain
+  - `NewSeedChain`
+  - `NewSeedChainFromSeed`
+  - `RecoverSeedChain`
+  - `(*SeedChain).CurrentAnchor`
+  - `(*SeedChain).DeriveCurrentKeyPair`
+  - `(*SeedChain).ConsumeSeed`
 - keystore
   - `EncryptPrivateKey`
   - `DecryptPrivateKey`
@@ -142,7 +157,7 @@ package main
 
 import (
 	"fmt"
-	"blockchain-crypto/walletcrypto"
+	"github.com/19231224lhr/CryptoArea/crypto/walletcrypto"
 )
 
 func main() {
@@ -159,9 +174,26 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println("verify:", ok)
+fmt.Println("verify:", ok)
 }
 ```
+
+## Seed-chain 最小示例
+
+如果你希望构建“地址不变、每笔交易一把确定性签名密钥”的流程，可以直接使用 `walletcrypto.SeedChain`。
+
+仓库里已经提供了一个最小示例：
+
+- `crypto/examples/walletcrypto-seedchain-demo/main.go`
+
+运行方式：
+
+```powershell
+cd crypto
+go run ./examples/walletcrypto-seedchain-demo
+```
+
+该示例默认使用 `ecdsa`，因此在 `CGO_ENABLED=0` 环境也能直接运行；如果你想体验同样的流程切到后量子签名，只需要把示例中的算法改成 `walletcrypto.AlgPQMLDSA`，并在 `CGO_ENABLED=1` 环境运行。
 
 ## 钱包交易场景：哈希链回退签名
 
@@ -247,3 +279,4 @@ go test -run TestWalletTxFlowWithHashChainRollbackAndPQSign ./walletcrypto/...
   - `CGO_ENABLED=0`：可编译，但 PQC 接口会返回明确错误
 - 当前 KEM 的正式可用路径是 `windows + cgo`。
 - `pqcgo/pqmagic/build-windows-kem/` 是本地构建中间目录，不是运行必需内容，已加入 `.gitignore`。
+

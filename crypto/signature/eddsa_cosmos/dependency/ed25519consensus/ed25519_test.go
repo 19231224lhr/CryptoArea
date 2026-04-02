@@ -1,7 +1,7 @@
 package ed25519consensus_test
 
 import (
-	"blockchain-crypto/signature/eddsa_cosmos/dependency/ed25519consensus"
+	"github.com/19231224lhr/CryptoArea/crypto/signature/eddsa_cosmos/dependency/ed25519consensus"
 	"crypto/ed25519"
 	"testing"
 )
@@ -16,3 +16,4 @@ func BenchmarkVerification(b *testing.B) {
 		ed25519consensus.Verify(pub, hash, signature)
 	}
 }
+

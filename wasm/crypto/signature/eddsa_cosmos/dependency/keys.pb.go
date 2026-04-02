@@ -4,7 +4,7 @@
 package ed25519
 
 import (
-	_ "blockchain-crypto/signature/eddsa_cosmos/dependency/amino"
+	_ "github.com/19231224lhr/CryptoArea/crypto/signature/eddsa_cosmos/dependency/amino"
 	crypto_ed25519 "crypto/ed25519"
 	fmt "fmt"
 	_ "github.com/cosmos/gogoproto/gogoproto"
@@ -505,3 +505,4 @@ var (
 	ErrIntOverflowKeys          = fmt.Errorf("proto: integer overflow")
 	ErrUnexpectedEndOfGroupKeys = fmt.Errorf("proto: unexpected end of group")
 )
+

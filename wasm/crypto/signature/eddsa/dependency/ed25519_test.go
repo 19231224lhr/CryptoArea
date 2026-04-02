@@ -15,7 +15,7 @@ import (
 	"strings"
 	"testing"
 
-	"blockchain-crypto/signature/eddsa/dependency/edwards25519"
+	"github.com/19231224lhr/CryptoArea/crypto/signature/eddsa/dependency/edwards25519"
 )
 
 type zeroReader struct{}
@@ -218,3 +218,4 @@ func BenchmarkVerification(b *testing.B) {
 		Verify(pub, message, signature)
 	}
 }
+

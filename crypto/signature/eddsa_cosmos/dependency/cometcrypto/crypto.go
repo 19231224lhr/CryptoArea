@@ -1,8 +1,8 @@
 package crypto
 
 import (
-	"blockchain-crypto/signature/eddsa_cosmos/dependency/cometcrypto/bytes"
-	"blockchain-crypto/signature/eddsa_cosmos/dependency/cometcrypto/tmhash"
+	"github.com/19231224lhr/CryptoArea/crypto/signature/eddsa_cosmos/dependency/cometcrypto/bytes"
+	"github.com/19231224lhr/CryptoArea/crypto/signature/eddsa_cosmos/dependency/cometcrypto/tmhash"
 )
 
 const (
@@ -52,3 +52,4 @@ type BatchVerifier interface {
 	// that signatures were added to the batch).
 	Verify() (bool, []bool)
 }
+
