@@ -9,6 +9,10 @@ import (
 	"math/big"
 )
 
+// GenerateAddress derives an address-like identifier from a public key.
+//
+// For EVM-compatible address recovery and personal_sign style flows, prefer
+// the dedicated crypto/evm package instead of AddressFormatEthereumHex.
 func GenerateAddress(publicKey []byte, opts *AddressOptions) (string, error) {
 	if len(publicKey) == 0 {
 		return "", fmt.Errorf("public key must not be empty")

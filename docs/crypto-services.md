@@ -18,7 +18,7 @@
 | 确定性密钥生成 | `GenerateKeyPairWithSeed` | 支持基于 seed 派生 |
 | 签名 | `SignMessage` | 统一签名入口 |
 | 验签 | `VerifyMessage` | 统一验签入口 |
-| 地址生成 | `GenerateAddress` | 支持 Base58Check / Hash160 Hex / Ethereum Hex |
+| 地址生成 | `GenerateAddress` | 支持 Base58Check / Hash160 Hex / Keccak-last20 Hex |
 | KEM 密钥生成 | `GenerateKEMKeyPair` | PQ KEM |
 | KEM 封装 | `EncapsulateSharedSecret` | PQ KEM |
 | KEM 解封装 | `DecapsulateSharedSecret` | PQ KEM |
@@ -33,6 +33,20 @@
 | Seed-chain 当前密钥 | `(*SeedChain).DeriveCurrentKeyPair` | 获取当前步的确定性密钥 |
 | Seed-chain 消费 | `(*SeedChain).ConsumeSeed` | 消费当前步并返回下一锚点 |
 
+## 2.1 其他新增基础包
+
+| 包 | 说明 |
+| --- | --- |
+| `crypto/evm` | `personal_sign` 哈希、恢复地址、校验地址、`bytes32` 编码 |
+| `crypto/encoding/canonical` | 稳定 JSON 规范化与排除字段后的规范化 |
+| `crypto/signature/secp256k1` | 显式 secp256k1 密钥、公钥、DER/可恢复签名辅助 |
+| `crypto/symmetric` | AES-GCM / AES-OFB 与 OFB 文件流处理 |
+| `crypto/compat/legacy` | 显式 legacy hash / 拼接兼容辅助 |
+| `crypto/protocol/tmps` | TMPS bundle / proof input / challenge / verify 服务接口 |
+| `crypto/protocol/tmps/codec/legacyv1` | BN254 / 标量 / proof input 的稳定兼容编码与服务实现 |
+| `crypto/protocol/pre` | 通用 trusted-proxy 重加密封装，基于 secp256k1 ECIES 与 AES-GCM，并提供稳定编码与哈希服务 |
+| `crypto/protocol/post` | strict / legacycompat profile 的 challenge/response transcript、稳定编码与验证服务 |
+
 ## 3. 当前支持的签名算法
 
 ### 3.1 经典签名
@@ -40,7 +54,7 @@
 | 算法标识 | 说明 |
 | --- | --- |
 | `bls` | BLS 签名 |
-| `ecdsa` | ECDSA |
+| `ecdsa` | ECDSA（当前实现实际为 secp256k1） |
 | `ec_schnorr` | EC Schnorr |
 | `eddsa` | EdDSA |
 | `eddsa_cosmos` | Cosmos 兼容 EdDSA |
@@ -78,6 +92,12 @@
 | 经典 seed-chain | 可用 | 可用 |
 | PQ 签名 | 返回明确错误 | 可用 |
 | PQ KEM | 返回明确错误 | 可用 |
+
+## 5.1 语义提醒
+
+- `walletcrypto.SignMessage("ecdsa", ...)` 是库内的通用 secp256k1 签名入口，不等价于 EVM `personal_sign`
+- 若需要以太坊兼容地址恢复和校验，请使用 `crypto/evm`
+- 若需要稳定 JSON 规范化，请使用 `crypto/encoding/canonical`
 
 ## 6. 推荐使用顺序
 

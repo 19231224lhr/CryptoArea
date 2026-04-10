@@ -12,6 +12,13 @@ module github.com/19231224lhr/CryptoArea/crypto
 import "github.com/19231224lhr/CryptoArea/crypto/walletcrypto"
 ```
 
+如果你的场景是 EVM / `personal_sign` / 地址恢复 / 结构化 JSON 哈希，请直接使用：
+
+```go
+import "github.com/19231224lhr/CryptoArea/crypto/evm"
+import "github.com/19231224lhr/CryptoArea/crypto/encoding/canonical"
+```
+
 ### 外部项目最小接入
 
 ```powershell
@@ -49,6 +56,13 @@ replace github.com/19231224lhr/CryptoArea/pqcgo => /path/to/CryptoArea/pqcgo
 - 常用哈希/HMAC/随机工具
 - Seed-chain（哈希链一次一钥）辅助
 
+补充：
+
+- `walletcrypto.AlgECDSA` 当前实际底层是 `secp256k1`
+- `walletcrypto` 不是 EVM `personal_sign` 兼容层
+- EVM 兼容能力请使用 `crypto/evm`
+- Canonical JSON 请使用 `crypto/encoding/canonical`
+
 ### 快速验证
 
 ```powershell
@@ -68,6 +82,10 @@ go run ./examples/walletcrypto-seedchain-demo
 - 根仓库总览：[`../README.md`](../README.md)
 - 外部使用指南：[`../docs/external-usage-guide.md`](../docs/external-usage-guide.md)
 - 经典签名实现说明：[`./signature/README.md`](./signature/README.md)
+- 协议层总览：[`./protocol/README.md`](./protocol/README.md)
+- TMPS：[`./protocol/tmps/README.md`](./protocol/tmps/README.md)
+- PRE：[`./protocol/pre/README.md`](./protocol/pre/README.md)
+- PoST：[`./protocol/post/README.md`](./protocol/post/README.md)
 
 ### 测试结果
 ![png](gotest.png)

@@ -10,6 +10,7 @@
 2. [密码服务目录](./crypto-services.md)
 3. [../crypto/README.MD](../crypto/README.MD)
 4. [../crypto/examples/walletcrypto-seedchain-demo/main.go](../crypto/examples/walletcrypto-seedchain-demo/main.go)
+5. [../crypto/protocol/README.md](../crypto/protocol/README.md)
 
 其中：
 
@@ -19,6 +20,9 @@
 - [密码服务目录](./crypto-services.md)
   - 适合“这个库到底提供什么”
   - 用表格汇总支持的算法、API、模块和能力边界
+- [../crypto/protocol/README.md](../crypto/protocol/README.md)
+  - 适合“新增协议层现在具体有哪些包”
+  - 重点说明 `tmps` / `pre` / `post` 的边界和示例入口
 
 ## 2. 内部发布与验收
 

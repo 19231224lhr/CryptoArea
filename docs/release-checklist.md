@@ -12,6 +12,7 @@
 ## 2. 代码质量
 
 - [ ] `go test ./...`（`crypto`）通过
+- [ ] `go test ./protocol/tmps/... ./protocol/pre ./protocol/post` 通过
 - [ ] `go test ./...`（`pqcgo`）通过
 - [ ] `go test ./...`（`wasm/crypto`）通过
 - [ ] `go vet ./walletcrypto/...` 通过
@@ -27,6 +28,10 @@
 ## 4. 文档
 
 - [ ] 根 README 已链接外部使用指南
+- [ ] `crypto/protocol/README.md` 最新
+- [ ] `crypto/protocol/tmps/README.md` 最新
+- [ ] `crypto/protocol/pre/README.md` 最新
+- [ ] `crypto/protocol/post/README.md` 最新
 - [ ] `docs/external-usage-guide.md` 最新
 - [ ] `docs/crypto-services.md` 最新
 - [ ] `docs/release-validation.md` 最新

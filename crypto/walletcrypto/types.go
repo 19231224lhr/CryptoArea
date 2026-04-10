@@ -11,6 +11,11 @@ type AddressFormat string
 const (
 	AddressFormatBase58Check AddressFormat = "base58check"
 	AddressFormatHash160Hex  AddressFormat = "hash160_hex"
+	// Deprecated: AddressFormatEthereumHex only derives a Keccak-last20 style
+	// hex address from the provided public-key bytes. It is not a full EVM
+	// compatibility surface and should not be used as a substitute for
+	// personal_sign, address recovery, or full Ethereum account semantics.
+	// Prefer github.com/19231224lhr/CryptoArea/crypto/evm for EVM-facing flows.
 	AddressFormatEthereumHex AddressFormat = "ethereum_hex"
 )
 
@@ -21,6 +26,8 @@ type AddressOptions struct {
 
 const (
 	AlgBLS         = "bls"
+	// AlgECDSA currently maps to the library's secp256k1 implementation.
+	// It is a generic signing entry, not an EVM personal_sign alias.
 	AlgECDSA       = "ecdsa"
 	AlgECSchnorr   = "ec_schnorr"
 	AlgEdDSA       = "eddsa"

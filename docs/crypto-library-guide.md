@@ -10,6 +10,13 @@
 
 `CryptoArea`（模块名 `crypto-suites`）是一个面向区块链钱包场景的统一密码能力库，整合了**经典密码**和**后量子密码（PQC）** 两套能力体系，为上层钱包/账户系统提供统一的调用接口。
 
+> 重要纠偏：
+>
+> - 当前代码中的 `ecdsa` 实际实现为 **secp256k1**，不是 P-256。
+> - 当前代码推荐的 EVM 兼容入口是 `crypto/evm`，不是 `walletcrypto.SignMessage`。
+> - 当前代码推荐的结构化 JSON 规范化入口是 `crypto/encoding/canonical`。
+> - 本文后续若出现 `ecdsa_p256`、`DeriveKeyPairFromSeed` 等旧命名，应视为历史设计语境，不代表当前对外稳定 API 名称。
+
 ### 1.1 核心能力
 
 | 能力类别 | 说明 |
@@ -109,7 +116,7 @@ go mod tidy
 
 | 算法常量名 | 算法 | 说明 |
 |-----------|------|------|
-| `ecdsa` | ECDSA P-256 | 最常用的经典签名 |
+| `ecdsa` | ECDSA secp256k1 | 当前默认经典签名实现 |
 | `bls` | BLS12-381 | 可聚合的签名方案 |
 | `ec_schnorr` | EC-Schnorr | Schnorr 签名变体 |
 | `eddsa` | Ed25519 | 高性能签名 |
@@ -196,13 +203,30 @@ addr, err := walletcrypto.GenerateAddress(kp.PublicKey, &walletcrypto.AddressOpt
     Format: walletcrypto.AddressFormatHash160Hex,
 })
 
-// 以太坊风格 Keccak256 地址
+// Keccak-last20 Hex 地址
 addr, err := walletcrypto.GenerateAddress(kp.PublicKey, &walletcrypto.AddressOptions{
     Format: walletcrypto.AddressFormatEthereumHex,
 })
 ```
 
 地址生成管线：`PublicKey → SHA256 → RIPEMD160 → [Version + Payload + Checksum] → Base58`
+
+如需真正的 EVM 兼容能力，请使用：
+
+```go
+import "github.com/19231224lhr/CryptoArea/crypto/evm"
+import "github.com/19231224lhr/CryptoArea/crypto/encoding/canonical"
+```
+
+例如：
+
+```go
+canonicalDoc, err := canonical.CanonicalizeExcluding(doc, []string{"signature"})
+hash, err := walletcrypto.HashData("sha256", []byte(canonicalDoc))
+personalHash := evm.PersonalSignHash(hash)
+_ = personalHash
+address, err := evm.RecoverAddressFromPersonalSign(hash, sig65)
+```
 
 ### 3.4 KEM 密钥封装
 

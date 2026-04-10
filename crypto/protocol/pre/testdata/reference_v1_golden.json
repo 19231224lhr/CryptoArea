@@ -1,0 +1,14 @@
+{
+  "payload_json": "{\"aad\":\"0x616164\",\"ciphertext\":\"0xaabbccdd\",\"nonce\":\"0x000102030405060708090a0b\",\"scheme\":\"pre-secp256k1-ecies-aesgcm-v1\"}",
+  "recipient_json": "{\"recipient_public_key\":\"0x0279be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798\",\"scheme\":\"pre-secp256k1-ecies-aesgcm-v1\",\"wrapped_key\":\"0x10203040\"}",
+  "delegation_token_json": "{\"delegatee_public_key\":\"0x0279be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798\",\"metadata\":\"0x6d657461\",\"proxy_public_key\":\"0x02c6047f9441ed7d6d3045406e95c07cd85c778e4b8cef3ca7abac09b95c709ee5\",\"scheme\":\"pre-secp256k1-ecies-aesgcm-v1\",\"wrapped_key_for_proxy\":\"0x50607080\"}",
+  "encrypted_message_json": "{\"payload\":{\"aad\":\"0x616164\",\"ciphertext\":\"0xaabbccdd\",\"nonce\":\"0x000102030405060708090a0b\",\"scheme\":\"pre-secp256k1-ecies-aesgcm-v1\"},\"recipient\":{\"recipient_public_key\":\"0x0279be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798\",\"scheme\":\"pre-secp256k1-ecies-aesgcm-v1\",\"wrapped_key\":\"0x10203040\"}}",
+  "payload_keccak256": "0xa8289523571490bed2d84999f7ea81b86ad5b9397bd9f731d3e4f2df62f43b19",
+  "recipient_keccak256": "0x31ef4bb5ebc5b8855704c500e2b127af4b7210bc0dfba8bf3aedb1221b346437",
+  "delegation_token_keccak256": "0x0ea6d39821ba579070a3b9a633d0fc4baf732931de423ae00915760987737dc2",
+  "encrypted_message_keccak256": "0x851b767066647453af5683316a3a27b3c9037d0b3bc3fabe8ddc13d7c388f071",
+  "payload_sha256": "0xeccb8f87191947045c92a12bafb0a19ccb096bc12dd93713b2d4370a4ab29b3b",
+  "recipient_sha256": "0x4df98b163d8b1f0aeff432bb013d9f88806186332d8214f1074826292a3f0bea",
+  "delegation_token_sha256": "0x3e99482a8a2d413a9b1010c62c44d9811a3c7b9292a5ecc1f3edb144af6a5f85",
+  "encrypted_message_sha256": "0xf9eca6d24406951c3dbd937b25c87b6f122370e4361059f979e52482470eb230"
+}

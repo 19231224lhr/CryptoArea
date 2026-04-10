@@ -4,6 +4,14 @@
 
 它的目标不是让业务项目自己去拼装底层算法，而是给上层工程提供一个清晰、稳定、可直接接入的密码能力入口。
 
+当前代码里 `walletcrypto.AlgECDSA` 对应的实际实现是 **secp256k1**，不是 P-256。
+如果你需要 EVM / `personal_sign` / 地址恢复这类以太坊兼容能力，应优先使用新增的：
+
+```go
+import "github.com/19231224lhr/CryptoArea/crypto/evm"
+import "github.com/19231224lhr/CryptoArea/crypto/encoding/canonical"
+```
+
 ## 我该看什么
 
 如果你是第一次接入这个仓库，建议按下面顺序阅读：
@@ -35,6 +43,12 @@ import "github.com/19231224lhr/CryptoArea/crypto/walletcrypto"
 ```
 
 不建议业务代码一开始就直接耦合 `pqcgo`。
+
+如果你的接入场景是：
+
+- 钱包、seed-chain、PQ 签名 / KEM：优先接 `walletcrypto`
+- `personal_sign`、恢复地址、EVM 兼容 keccak：优先接 `crypto/evm`
+- 结构化 JSON 规范化与跨端一致哈希：优先接 `crypto/encoding/canonical`
 
 ## 外部工程师快速接入
 
@@ -114,18 +128,27 @@ go work use C:/path/to/CryptoArea/pqcgo
 | --- | --- |
 | 密钥生成 | 支持经典签名与后量子签名密钥生成 |
 | 签名与验签 | 统一的 `SignMessage` / `VerifyMessage` 入口 |
-| 地址生成 | 支持 Base58Check、Hash160 Hex、Ethereum Hex |
+| 地址生成 | 支持 Base58Check、Hash160 Hex、Keccak-last20 Hex |
 | Seed-chain | 支持哈希链一次一钥流程与确定性派生 |
 | PQ KEM | 支持后量子密钥封装 / 解封装 |
 | keystore | 支持私钥加密存储 |
 | 哈希与工具函数 | 提供哈希、HMAC、随机数等通用工具 |
+| EVM 兼容辅助 | 提供 `personal_sign` 哈希、恢复地址、校验地址、`bytes32` 编码 |
+| Canonical JSON | 提供稳定 JSON 规范化与排除字段后的规范化 |
+| 通用对称加密 | 提供 AES-GCM / AES-OFB 原语与 OFB 文件流处理 |
+| 迁移兼容工具 | 提供 legacy hash/拼接规则的显式兼容入口 |
+| TMPS 编码兼容层 | 提供 BN254 元素、标量与 proof input 的 legacyv1 稳定编码 |
+| TMPS 服务骨架 | 提供 challenge 生成、proof/pk/challenge 哈希与 envelope 完整性校验 |
+| PRE 参考实现 | 提供基于 secp256k1 ECIES + AES-GCM 的 trusted-proxy 重加密封装 |
+| PRE 稳定编码层 | 提供 payload / token / recipient / message 的 canonical JSON 编码与哈希 |
+| PoST 服务层 | 提供 strict / legacycompat profile 的 challenge、proof、verify 与稳定编码 |
 
 ### 支持的签名算法
 
 经典签名：
 
 - `bls`
-- `ecdsa`
+- `ecdsa`（当前实现实际为 `secp256k1`）
 - `ec_schnorr`
 - `eddsa`
 - `eddsa_cosmos`
@@ -139,6 +162,12 @@ go work use C:/path/to/CryptoArea/pqcgo
 - `pq_slh_dsa`
 
 如需完整的 API 和能力边界，请看 [docs/crypto-services.md](./docs/crypto-services.md)。
+
+说明：
+
+- `walletcrypto.SignMessage(ecdsa)` 是当前库内的通用 secp256k1 签名入口，不等价于以太坊 `personal_sign`
+- 如果你需要 EVM 兼容消息哈希、恢复地址、校验地址，请使用 `crypto/evm`
+- 如果你需要结构化文档签名前的稳定 JSON 规范化，请使用 `crypto/encoding/canonical`
 
 ## 设计规范参考：做成可替换的密码基座
 

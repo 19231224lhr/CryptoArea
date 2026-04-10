@@ -1,0 +1,14 @@
+{
+  "strict_challenge_material_json": "{\"commitment\":\"0x636f6d6d69746d656e742d726f6f74\",\"context\":\"0x706f73742d636f6e74657874\",\"metadata\":\"0x6d657461\",\"nonce\":\"0x010203\",\"time_anchor\":\"0x74696d652d616e63686f72\"}",
+  "strict_challenge_json": "{\"digest\":\"0x8299bd4a81012d35a5718b7c77b3f51b3dfac20a54722ffe0093e6c8f74f2e25\",\"profile\":\"post-strict-v1\"}",
+  "strict_proof_material_json": "{\"authenticator_key\":\"0x61757468656e74696361746f722d6b65792d31323334353637383930\",\"challenge\":{\"digest\":\"0x8299bd4a81012d35a5718b7c77b3f51b3dfac20a54722ffe0093e6c8f74f2e25\",\"profile\":\"post-strict-v1\"},\"metadata\":\"0x70726f6f662d6d657461\",\"witness\":\"0x7769746e6573732d6279746573\"}",
+  "strict_proof_json": "{\"challenge_digest\":\"0x8299bd4a81012d35a5718b7c77b3f51b3dfac20a54722ffe0093e6c8f74f2e25\",\"metadata\":\"0x70726f6f662d6d657461\",\"profile\":\"post-strict-v1\",\"response_digest\":\"0xeb3edfdfb25d1382ca4877162c05865948100ac4d6b70995cbc8f393868eda72\",\"witness_digest\":\"0xaf188ca54d607d63f4f4ee2a52183aba09991a28de6a46f016efd47de3862d71\"}",
+  "strict_challenge_hash": "0xd5cef974fb4b764180818cc5cc0d9f4ea1dab3357254579ed9c95c3c9844e391",
+  "strict_proof_hash": "0x7c212dbbd293db4d5fb66f993fbff3d2b957d8e3b432e61b6f626cd7b2f8a8f3",
+  "legacy_challenge_material_json": "{\"commitment\":\"0x636f6d6d69746d656e742d726f6f74\",\"context\":\"0x706f73742d636f6e74657874\",\"metadata\":\"0x6d657461\",\"nonce\":\"0x010203\",\"time_anchor\":\"0x74696d652d616e63686f72\"}",
+  "legacy_challenge_json": "{\"digest\":\"0xecf6e405133c286f59d859ddff8a95ef941163395d0b945d5e88cabd\",\"profile\":\"post-legacycompat-v1\"}",
+  "legacy_proof_material_json": "{\"authenticator_key\":\"0x61757468656e74696361746f722d6b65792d31323334353637383930\",\"challenge\":{\"digest\":\"0xecf6e405133c286f59d859ddff8a95ef941163395d0b945d5e88cabd\",\"profile\":\"post-legacycompat-v1\"},\"metadata\":\"0x70726f6f662d6d657461\",\"witness\":\"0x7769746e6573732d6279746573\"}",
+  "legacy_proof_json": "{\"challenge_digest\":\"0xecf6e405133c286f59d859ddff8a95ef941163395d0b945d5e88cabd\",\"metadata\":\"0x70726f6f662d6d657461\",\"profile\":\"post-legacycompat-v1\",\"response_digest\":\"0xc21880deb821efe6e2a73372bd0effc014de96ad7d5817c2ae496a18a1faa273\",\"witness_digest\":\"0x05fa951bac47533779b879bfdc6e85a945e8d21c889baa426fba42f9\"}",
+  "legacy_challenge_hash": "0x01dc662dd723feb20b369edc78dc5782db59d67a7dfdfe1b6a6bccf1",
+  "legacy_proof_hash": "0x6b57ed11398b6e19323a110ab3fd62daa4ceef693685655e40c75332"
+}

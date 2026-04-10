@@ -3,10 +3,13 @@
 package main
 
 import (
-	"github.com/19231224lhr/CryptoArea/crypto/signature"
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
+	"github.com/19231224lhr/CryptoArea/crypto/encoding/canonical"
+	"github.com/19231224lhr/CryptoArea/crypto/evm"
+	"github.com/19231224lhr/CryptoArea/crypto/signature"
+	"strings"
 	"syscall/js"
 )
 
@@ -173,3 +176,160 @@ func jsonWrapper() js.Func {
 	return jsonFunc
 }
 
+func canonicalizeJSONWrapper() js.Func {
+	return js.FuncOf(func(this js.Value, args []js.Value) interface{} {
+		if len(args) != 1 {
+			return "Invalid number of arguments passed"
+		}
+		raw, err := decodeJSONArg(args[0].String())
+		if err != nil {
+			return err.Error()
+		}
+		out, err := canonical.Canonicalize(raw)
+		if err != nil {
+			return err.Error()
+		}
+		return out
+	})
+}
+
+func canonicalizeJSONExcludingWrapper() js.Func {
+	return js.FuncOf(func(this js.Value, args []js.Value) interface{} {
+		if len(args) != 2 {
+			return "Invalid number of arguments passed"
+		}
+		raw, err := decodeJSONArg(args[0].String())
+		if err != nil {
+			return err.Error()
+		}
+		exclude, err := decodeStringListArg(args[1])
+		if err != nil {
+			return err.Error()
+		}
+		out, err := canonical.CanonicalizeExcluding(raw, exclude)
+		if err != nil {
+			return err.Error()
+		}
+		return out
+	})
+}
+
+func keccak256HexWrapper() js.Func {
+	return js.FuncOf(func(this js.Value, args []js.Value) interface{} {
+		if len(args) != 1 {
+			return "Invalid number of arguments passed"
+		}
+		input, err := decodeHexArg(args[0].String())
+		if err != nil {
+			return err.Error()
+		}
+		return hex.EncodeToString(evm.Keccak256(input))
+	})
+}
+
+func personalSignHashHexWrapper() js.Func {
+	return js.FuncOf(func(this js.Value, args []js.Value) interface{} {
+		if len(args) != 1 {
+			return "Invalid number of arguments passed"
+		}
+		message, err := decodeHexArg(args[0].String())
+		if err != nil {
+			return err.Error()
+		}
+		return hex.EncodeToString(evm.PersonalSignHash(message))
+	})
+}
+
+func recoverAddressFromPersonalSignHexWrapper() js.Func {
+	return js.FuncOf(func(this js.Value, args []js.Value) interface{} {
+		if len(args) != 2 {
+			return "Invalid number of arguments passed"
+		}
+		message, err := decodeHexArg(args[0].String())
+		if err != nil {
+			return err.Error()
+		}
+		signature, err := decodeHexArg(args[1].String())
+		if err != nil {
+			return err.Error()
+		}
+		address, err := evm.RecoverAddressFromPersonalSign(message, signature)
+		if err != nil {
+			return err.Error()
+		}
+		return address
+	})
+}
+
+func verifyPersonalSignAddressHexWrapper() js.Func {
+	return js.FuncOf(func(this js.Value, args []js.Value) interface{} {
+		if len(args) != 3 {
+			return "Invalid number of arguments passed"
+		}
+		message, err := decodeHexArg(args[0].String())
+		if err != nil {
+			return err.Error()
+		}
+		signature, err := decodeHexArg(args[1].String())
+		if err != nil {
+			return err.Error()
+		}
+		ok, err := evm.VerifyPersonalSignAddress(message, signature, args[2].String())
+		if err != nil {
+			return err.Error()
+		}
+		return ok
+	})
+}
+
+func bytes32HexWrapper() js.Func {
+	return js.FuncOf(func(this js.Value, args []js.Value) interface{} {
+		if len(args) != 1 {
+			return "Invalid number of arguments passed"
+		}
+		input, err := decodeHexArg(args[0].String())
+		if err != nil {
+			return err.Error()
+		}
+		out, err := evm.Bytes32Hex(input)
+		if err != nil {
+			return err.Error()
+		}
+		return out
+	})
+}
+
+func decodeJSONArg(input string) (interface{}, error) {
+	var raw interface{}
+	if err := json.Unmarshal([]byte(input), &raw); err != nil {
+		return nil, err
+	}
+	return raw, nil
+}
+
+func decodeStringListArg(value js.Value) ([]string, error) {
+	if value.Type() == js.TypeString {
+		return []string{value.String()}, nil
+	}
+	if value.Type() != js.TypeObject {
+		return nil, fmt.Errorf("exclude must be a string or array of strings")
+	}
+	length := value.Length()
+	out := make([]string, 0, length)
+	for i := 0; i < length; i++ {
+		entry := value.Index(i)
+		if entry.Type() != js.TypeString {
+			return nil, fmt.Errorf("exclude[%d] must be a string", i)
+		}
+		out = append(out, entry.String())
+	}
+	return out, nil
+}
+
+func decodeHexArg(input string) ([]byte, error) {
+	normalized := strings.TrimPrefix(strings.TrimSpace(input), "0x")
+	if normalized == "" {
+		return nil, fmt.Errorf("hex input must not be empty")
+	}
+	return hex.DecodeString(normalized)
+}

@@ -6,6 +6,7 @@
 
 - `github.com/19231224lhr/CryptoArea/crypto` 主模块
 - `walletcrypto` 对外入口
+- `protocol/tmps` / `protocol/pre` / `protocol/post` 新增协议层
 - `pqcgo` 子模块
 - `github.com/19231224lhr/CryptoArea/wasm/crypto` wasm 模块
 - 外部消费者本地接入烟测
@@ -19,12 +20,14 @@
 ```powershell
 go test ./...
 go run ./examples/walletcrypto-seedchain-demo
+go test ./protocol/tmps/... ./protocol/pre ./protocol/post
 ```
 
 结果：
 
 - `go test ./...` 通过
 - seed-chain 示例通过，输出正常
+- `tmps` / `pre` / `post` 定向测试通过
 
 ## 1.1 WASM 模块默认验证
 
@@ -212,5 +215,6 @@ import "github.com/19231224lhr/CryptoArea/crypto/walletcrypto"
 - 多平台矩阵验证
 - 多 Go 版本矩阵验证
 - `walletcrypto` 包级 examples / 更多复杂示例
+- `tmps` / `pre` / `post` 的更多示例与跨语言验证向量
 - 更正式的版本发布与 changelog 流程
 

@@ -23,6 +23,12 @@
 import "github.com/19231224lhr/CryptoArea/crypto/walletcrypto"
 ```
 
+但请按能力边界选择入口：
+
+- 钱包、PQ 签名、KEM、seed-chain：`walletcrypto`
+- EVM 兼容 `personal_sign` / 恢复地址 / `bytes32` 编码：`crypto/evm`
+- 结构化数据规范化：`crypto/encoding/canonical`
+
 ## 1.1 最小接入步骤
 
 如果你是在一个新的 Go 项目里接入，推荐顺序如下：
@@ -106,13 +112,20 @@ go work use /path/to/CryptoArea/pqcgo
 | 私钥加密存储 | `EncryptPrivateKey`、`DecryptPrivateKey` |
 | 工具函数 | `RandomBytes`、`HashData`、`HMACSHA256` |
 | Seed-chain | `NewSeedChain`、`NewSeedChainFromSeed`、`RecoverSeedChain`、`(*SeedChain).ConsumeSeed` |
+| EVM 兼容 | `evm.PersonalSignHash`、`evm.RecoverAddressFromPersonalSign`、`evm.VerifyPersonalSignAddress`、`evm.Bytes32Hex` |
+| Canonical JSON | `canonical.Canonicalize`、`canonical.CanonicalizeExcluding` |
+| TMPS 编码兼容层 | `protocol/tmps/codec/legacyv1.MarshalProofInput`、`UnmarshalProofInput` |
+| TMPS 服务骨架 | `GenerateChallenge`、`ProofHash`、`PublicKeyHash`、`ChallengeHash`、`VerifyEnvelope` |
+| PRE 参考实现 | `protocol/pre.EncryptForRecipient`、`CreateDelegationToken`、`ReEncryptDataKey` |
+| PRE 编码与哈希 | `MarshalPayload`、`MarshalDelegationToken`、`EncryptedMessageHash` |
+| PoST 服务层 | `GenerateChallenge`、`Prove`、`Verify`、`ChallengeHash`、`ProofHash` |
 
 ## 3. 支持的签名算法
 
 ### 3.1 经典签名
 
 - `bls`
-- `ecdsa`
+- `ecdsa`（当前实现实际为 `secp256k1`）
 - `ec_schnorr`
 - `eddsa`
 - `eddsa_cosmos`
@@ -194,6 +207,28 @@ go run ./examples/walletcrypto-seedchain-demo
 ```go
 walletcrypto.AlgPQMLDSA
 ```
+
+## 5.3 EVM / 结构化数据场景
+
+如果你的业务场景需要：
+
+- `personal_sign`
+- 从签名恢复地址
+- `bytes32` 十六进制编码
+- 结构化 JSON 规范化后再哈希 / 签名
+
+请不要直接把这些行为压到 `walletcrypto` 上，而应分别使用：
+
+```go
+import "github.com/19231224lhr/CryptoArea/crypto/evm"
+import "github.com/19231224lhr/CryptoArea/crypto/encoding/canonical"
+```
+
+说明：
+
+- `walletcrypto.SignMessage(AlgECDSA, ...)` 是库内的通用 secp256k1 签名入口
+- 它不是 EVM `personal_sign` 语义，也不负责恢复地址
+- `walletcrypto.GenerateAddress(..., AddressFormatEthereumHex)` 当前是 Keccak-last20 风格地址派生，不应直接当作完整 EVM 兼容层
 
 ## 6. 本地联调时的 replace 建议
 
